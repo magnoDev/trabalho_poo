@@ -9,7 +9,7 @@ package main;
  *
  * @author magno
  */
-public class ListaCompras {
+public class Main {
 
     /**
      * @param args the command line arguments
