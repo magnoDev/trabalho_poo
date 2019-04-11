@@ -5,6 +5,8 @@
  */
 package persistencia;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,6 +29,20 @@ public class PersistenciaArquivo {
             } catch (IOException ex) {
                 Logger.getLogger(PersistenciaArquivo.class.getName()).log(Level.SEVERE, null, ex);
             }
+    }
+    
+    public void LerArquivo(String pathFile){
+        // Le o arquivo
+        try{
+            FileReader ler = new FileReader(pathFile);
+            BufferedReader reader = new BufferedReader(ler);  
+            String linha;
+            while( (linha = reader.readLine()) != null ){
+                System.out.println(linha);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(PersistenciaArquivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
