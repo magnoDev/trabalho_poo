@@ -5,9 +5,12 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author david
  */
-public class Produto {
+public class Produto implements Serializable{
+    
 }
