@@ -5,12 +5,14 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author 20162bsi0236
  */
-public class Cliente {
+public class Cliente implements Serializable {
     String nome;
     String email;
     String login;
@@ -30,6 +32,56 @@ public class Cliente {
     public void salvar(){
         System.out.println(this.nome);
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+        this.login = email;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+        this.email = login;
+    }
+
+    public Localizacao getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+    
+    
+    
+    
     
 }
 
