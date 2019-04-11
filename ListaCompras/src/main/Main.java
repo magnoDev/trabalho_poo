@@ -7,6 +7,7 @@ package main;
 
 import dominio.Cliente;
 import dominio.Localizacao;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Main {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String nome = JOptionPane.showInputDialog("Insira o nome do usuário");
         String email = JOptionPane.showInputDialog("Insira o email do usuário");
         String dataNascimento = JOptionPane.showInputDialog("Insira a data de nascimento do usuário");
@@ -25,7 +26,9 @@ public class Main {
 
         Localizacao localizadao = new Localizacao(estado, cidade);
         Cliente cliente = new Cliente(nome, email, dataNascimento, localizadao, senha);
-        cliente.salvar();
+        
+        
+        cliente.salvar(cliente);
         
         
     }

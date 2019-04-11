@@ -5,7 +5,9 @@
  */
 package dominio;
 
+import java.io.IOException;
 import java.io.Serializable;
+import persistencia.PersistenciaArquivo;
 
 
 /**
@@ -29,8 +31,9 @@ public class Cliente implements Serializable {
         this.senha = senha;
     } 
     
-    public void salvar(){
-        System.out.println(this.nome);
+    public void salvar(Cliente cliente) throws IOException{
+        PersistenciaArquivo persistencia = new PersistenciaArquivo();
+        persistencia.salvar(cliente);
     }
 
     public String getNome() {
