@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dominio;
+package dominio.produto;
+
+import java.io.Serializable;
 
 /**
  *
  * @author david
  */
-public class Produto {
+public class Produto extends ProdutoBase implements Serializable{
+    private double valor;
+    private String dataValidade;
+    private String lote;
 }

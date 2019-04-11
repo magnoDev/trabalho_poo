@@ -17,7 +17,7 @@ import java.io.ObjectOutputStream;
  */
 public class PersistenciaArquivo {
     
-    public void salvar(Object objeto, String nomeArquivo) throws FileNotFoundException, IOException{
+    public void salvar(Object objeto) throws FileNotFoundException, IOException{
         
 //        SALVA EM FORMATO DE TEXTO
 //        FileWriter arq;
@@ -33,7 +33,7 @@ public class PersistenciaArquivo {
         
         
         ObjectOutputStream objectOut;			
-        objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(nomeArquivo)));
+        objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("dados.txt")));
         objectOut.writeObject(objeto);
         objectOut.close();
 
