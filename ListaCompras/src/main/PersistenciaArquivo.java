@@ -30,7 +30,7 @@ public class PersistenciaArquivo {
         FileWriter arq;
             arq = new FileWriter(file.getAbsoluteFile(), true);        
             PrintWriter gravarArq = new PrintWriter(arq);
-            gravarArq.append( conta );        
+            gravarArq.append( dados );        
             arq.close();  
             System.out.println("Arquivo gravado com sucesso!");
         } catch (IOException ex) {
