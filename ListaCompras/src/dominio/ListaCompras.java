@@ -6,6 +6,7 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -70,6 +71,17 @@ public class ListaCompras {
     public void removeItem(ItemLista item){
         itens.remove(getIndexItemLista(item));
         setValorTotal((getValorTotal()-(item.getQuantidade() * item.getProduto().getValor())));
+    }
+    
+    public void imprimeLista(){
+    
+        Iterator lista = this.itens.iterator();
+        
+        while(lista.hasNext()){
+            System.out.println(lista.next());
+        }
+        
+        
     }
     
 }
