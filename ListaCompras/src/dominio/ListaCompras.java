@@ -5,15 +5,18 @@
  */
 package dominio;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import persistencia.PersistenciaArquivo;
 
 /**
  *
  * @author magno
  */
-public class ListaCompras {
+public class ListaCompras implements Serializable {
     
     private String nome_lista;
     private Cliente cliente;
@@ -22,6 +25,11 @@ public class ListaCompras {
     
     public ListaCompras(){
     
+    }
+    
+    public void salvar(ListaCompras listaCompras) throws IOException{
+        PersistenciaArquivo persistencia = new PersistenciaArquivo();
+        persistencia.salvar(listaCompras);
     }
     
     public String getNome_lista() {
