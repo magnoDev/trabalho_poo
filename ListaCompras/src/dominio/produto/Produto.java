@@ -15,4 +15,12 @@ public class Produto extends ProdutoBase implements Serializable{
     private double valor;
     private String dataValidade;
     private String lote;
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
 }
