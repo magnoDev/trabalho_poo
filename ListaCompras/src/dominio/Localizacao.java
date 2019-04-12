@@ -5,11 +5,13 @@
  */
 package dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author 20162bsi0236
  */
-public class Localizacao {
+public class Localizacao implements Serializable{
     String estado;
     String cidade;
 
