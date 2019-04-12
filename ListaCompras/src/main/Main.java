@@ -7,8 +7,10 @@ package main;
 
 import dominio.Cliente;
 import dominio.Localizacao;
+import dominio.produto.ProdutoBase;
 import java.io.IOException;
 import javax.swing.JOptionPane;
+import persistencia.PersistenciaArquivo;
 
 /**
  *
@@ -24,8 +26,15 @@ public class Main {
         String cidade = JOptionPane.showInputDialog("Insira a cidade em que o usuário reside");
         String senha = JOptionPane.showInputDialog("Insira a senha que o usuário deseja");
 
+        PersistenciaArquivo dados = new PersistenciaArquivo();
         Localizacao localizadao = new Localizacao(estado, cidade);
         Cliente cliente = new Cliente(nome, email, dataNascimento, localizadao, senha);
+        dados.salvar(cliente);
+        
+        ProdutoBase arroz = new ProdutoBase("Arroz","Grãos","Integral",5.00,"SEPÉ");
+        dados.salvar(arroz);
+        
+        
         
         
         cliente.salvar(cliente);
