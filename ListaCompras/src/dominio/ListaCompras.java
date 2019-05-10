@@ -20,10 +20,12 @@ public class ListaCompras implements Serializable {
     
     private String nome_lista;
     private Cliente cliente;
-    private final List<ItemLista> itens = new ArrayList<>();
+    private List<ItemLista> itens;
     private double valorTotal = 0.0;
     
     public ListaCompras(){
+        
+        itens = new ArrayList();
     
     }
     

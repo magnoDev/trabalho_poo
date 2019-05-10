@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,12 +31,21 @@ public class PersistenciaArquivo {
 //                Logger.getLogger(PersistenciaArquivo.class.getName()).log(Level.SEVERE, null, ex);
 //            }
         
-        
-        
-        ObjectOutputStream objectOut;			
-        objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("dados.txt")));
-        objectOut.writeObject(objeto);
-        objectOut.close();
+        ObjectOutputStream objectOut = null;
+        try{
+            objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("dados.txt")));
+            objectOut.writeObject(objeto);
+        }
+        catch(FileNotFoundException e){
+            JOptionPane.showMessageDialog(null, "Erro na localização do arquivo"  + "/nErro gerado:"+ e.getMessage(), "Erro - Não encontrado", JOptionPane.ERROR_MESSAGE);
+            objectOut = new ObjectOutputStream(null);
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, e, "Erro ao acessar o arquivo" + "/nErro gerado:"+ e.getMessage(), JOptionPane.ERROR_MESSAGE);
+        } 
+        finally{
+            objectOut.close();
+        }
 
     }
     
