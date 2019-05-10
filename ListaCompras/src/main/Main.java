@@ -12,6 +12,8 @@ import dominio.Localizacao;
 import dominio.produto.Produto;
 import dominio.produto.ProdutoBase;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import persistencia.PersistenciaArquivo;
 
@@ -50,10 +52,18 @@ public class Main {
             String peso = JOptionPane.showInputDialog("Insira o peso do " + produtoNome);
             String marca = JOptionPane.showInputDialog("Insira a marca do " + produtoNome);
 
-            Produto produto = new Produto(preco,dataValidade,lote, produtoNome, categoria, tipo, peso, marca);
-
+            Produto produto;
             ItemLista item = new ItemLista();
-            item.setProduto(produto);
+
+            try {
+                produto = new Produto(preco,dataValidade,lote, produtoNome, categoria, tipo, peso, marca);
+                item.setProduto(produto);
+
+            } catch (Exception ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+
             int quantidade = Integer.parseInt(JOptionPane.showInputDialog("Insira a quantidade de" + produtoNome));
             item.setQuantidade(quantidade);
             

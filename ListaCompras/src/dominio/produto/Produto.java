@@ -17,19 +17,19 @@ public class Produto extends ProdutoBase implements Serializable{
     private String lote;
 
     public Produto(double valor, String dataValidade, String lote, String nome, 
-            String categoria, String tipo, double peso, String marca) {
+            String categoria, String tipo, double peso, String marca) throws Exception {
         super(nome, categoria, tipo, peso, marca);
-        this.valor = valor;
-        this.dataValidade = dataValidade;
-        this.lote = lote;
+        this.setValor(valor);
+        this.setDataValidade(dataValidade);
+        this.setLote(lote);
     }
     
     public Produto(String valor, String dataValidade, String lote, String nome, 
-            String categoria, String tipo, String peso, String marca) {
+            String categoria, String tipo, String peso, String marca) throws Exception {
         super(nome, categoria, tipo, peso, marca);
-        this.valor = Double.parseDouble(valor);
-        this.dataValidade = dataValidade;
-        this.lote = lote;
+        this.setValor(Double.parseDouble(valor));
+        this.setDataValidade(dataValidade);
+        this.setLote(lote);
     }
     
     public String toString(Produto produto){
@@ -51,15 +51,24 @@ public class Produto extends ProdutoBase implements Serializable{
         return lote;
     }
 
-    public void setValor(double valor) {
+    public void setValor(double valor) throws Exception {
+        if(valor == 0){
+            throw new Exception("Valor não pode ser zero!");
+        }
         this.valor = valor;
     }
 
-    public void setDataValidade(String dataValidade) {
+    public void setDataValidade(String dataValidade) throws Exception {
+        if(dataValidade.equals("")){
+            throw new Exception("Data de validade não pode ser vazio!");
+        }
         this.dataValidade = dataValidade;
     }
 
-    public void setLote(String lote) {
+    public void setLote(String lote) throws Exception {
+        if(lote.equals("")){
+            throw new Exception("Lote não pode ser vazio!");
+        }
         this.lote = lote;
     }
     
