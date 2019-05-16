@@ -36,12 +36,12 @@ public class ProdutoBase implements Serializable{
 
     }
     
-    public String toString(ProdutoBase produto){
-        return produto.nome + "," 
-                + produto.categoria + "," 
-                + produto.tipo + "," 
-                + produto.peso + ","
-                + produto.marca;
+    public String toString(){
+        return this.nome + ", " 
+                + this.categoria + ", " 
+                + this.tipo + ", " 
+                + this.peso + ", "
+                + this.marca;
     }
 
     public String getNome() {

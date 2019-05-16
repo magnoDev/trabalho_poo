@@ -16,27 +16,29 @@ public class Produto extends ProdutoBase implements Serializable{
     private String dataValidade;
     private String lote;
 
-    public Produto(double valor, String dataValidade, String lote, String nome, 
-            String categoria, String tipo, double peso, String marca) throws Exception {
+    public Produto(String nome, String categoria, String tipo, double peso, 
+            String marca, double valor, String dataValidade, String lote) throws Exception {
         super(nome, categoria, tipo, peso, marca);
         this.setValor(valor);
         this.setDataValidade(dataValidade);
         this.setLote(lote);
     }
     
-    public Produto(String valor, String dataValidade, String lote, String nome, 
-            String categoria, String tipo, String peso, String marca) throws Exception {
+    public Produto(String nome, String categoria, String tipo, String peso, 
+            String marca, String valor, String dataValidade, String lote) throws Exception {
         super(nome, categoria, tipo, peso, marca);
         this.setValor(Double.parseDouble(valor));
         this.setDataValidade(dataValidade);
         this.setLote(lote);
     }
     
-    public String toString(Produto produto){
-        return produto.toString() + "," 
-                + produto.valor + ","
-                + produto.dataValidade + ","
-                + produto.lote;
+    public String toString(){
+        String strProduto = super.toString();
+        strProduto +=  ", " 
+                + this.valor + ", "
+                + this.dataValidade + ", "
+                + this.lote;
+        return strProduto;
     }
 
     public double getValor() {
