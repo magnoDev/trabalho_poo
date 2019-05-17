@@ -20,17 +20,6 @@ public class PersistenciaArquivo {
     
     public void salvar(Object objeto) throws FileNotFoundException, IOException{
         
-//        SALVA EM FORMATO DE TEXTO
-//        FileWriter arq;
-//            try {
-//                arq = new FileWriter(urlArquivo, true);        
-//                PrintWriter gravarArq = new PrintWriter(arq);
-//                gravarArq.append( dados + "\n");        
-//                arq.close();   
-//            } catch (IOException ex) {
-//                Logger.getLogger(PersistenciaArquivo.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-        
         ObjectOutputStream objectOut = null;
         try{
             objectOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("dados.txt")));
@@ -41,7 +30,7 @@ public class PersistenciaArquivo {
             objectOut = new ObjectOutputStream(null);
         }
         catch(IOException e){
-            JOptionPane.showMessageDialog(null, e, "Erro ao acessar o arquivo" + "/nErro gerado:"+ e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao acessar o arquivo" + "/nErro gerado:"+ e.getMessage(), "Erro de acesso", JOptionPane.ERROR_MESSAGE);
         } 
         finally{
             objectOut.close();
