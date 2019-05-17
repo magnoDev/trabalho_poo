@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Main {
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, Exception {
         String nome = JOptionPane.showInputDialog("Insira o nome do usuário");
         String email = JOptionPane.showInputDialog("Insira o email do usuário");
         String dataNascimento = JOptionPane.showInputDialog("Insira a data de nascimento do usuário");

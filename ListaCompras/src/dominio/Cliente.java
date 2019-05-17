@@ -22,14 +22,16 @@ public class Cliente implements Serializable {
     Localizacao localizacao;
     String senha;
 
-    public Cliente(String nome, String email, String dataNascimento, Localizacao localizacao, String senha) {
+    public Cliente(String nome, String email, String dataNascimento, Localizacao localizacao, String senha) throws Exception {
         this.nome = nome;
         this.email = email;
         this.login = email;
         this.dataNascimento = dataNascimento;
         this.localizacao = localizacao;
-        this.senha = senha;
+        this.setSenha(senha);
     } 
+
+    Cliente() {}
     
     public void salvar(Cliente cliente) throws IOException{
         PersistenciaArquivo persistencia = new PersistenciaArquivo();
@@ -74,8 +76,12 @@ public class Cliente implements Serializable {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenha(String senha) throws Exception {
+        if (senha.equals("")){
+            throw new Exception("Senha não pode ser vazia");
+        }else{
+            this.senha = senha;
+        }
     }
 
     public String getDataNascimento() {
