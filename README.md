@@ -6,3 +6,5 @@ Repositório para o trabalho da matéria de Programação Orientada a Objetos do
 **Project Model Canvas(PMC):** https://docs.google.com/presentation/d/1vg9alict0Ndh2OUyadnIp32uimxk29N468fCT2JyMqM/edit#slide=id.p
 
 **Mockup:** https://github.com/magnoDev/trabalho_poo/blob/master/ListaCompras/Mockup/Mockup_Analise.pdf
+
+**Diagrma de classes:** https://drive.google.com/file/d/1K0ossoVVPP42yz_0QchKsb4aNB8DtbXb/view?usp=sharing
