@@ -18,7 +18,7 @@ public class ItemLista implements Serializable {
     private Produto produto;
     private int quantidade;
     
-    private ItemLista(){
+    public ItemLista(){
     
     }
     

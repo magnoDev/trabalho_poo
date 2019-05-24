@@ -18,35 +18,40 @@ public class ProdutoBase implements Serializable{
     private double peso;
     private String marca;
     
-    public ProdutoBase(String nome, String categoria, String tipo, double peso, String marca){
-        this.nome = nome;
-        this.categoria = categoria;
-        this.tipo = tipo;
-        this.peso = peso;
-        this.marca= marca;
+    public ProdutoBase(String nome, String categoria, String tipo, double peso, String marca) throws Exception{
+        this.setNome(nome);
+        this.setCategoria(categoria);
+        this.setTipo(tipo);
+        this.setPeso(peso);
+        this.setMarca(marca);
     }
     
-    public ProdutoBase(String nome, String categoria, String tipo, String peso, String marca){
-        this.nome = nome;
-        this.categoria = categoria;
-        this.tipo = tipo;
-        this.peso = Double.parseDouble(peso);
-        this.marca= marca;
+    public ProdutoBase(String nome, String categoria, String tipo, String peso, String marca) throws Exception{
+        
+        this.setNome(nome);
+        this.setCategoria(categoria);
+        this.setTipo(tipo);
+        this.setPeso(Double.parseDouble(peso));
+        this.setMarca(marca);
+
     }
     
-    public String toString(ProdutoBase produto){
-        return produto.nome + "," 
-                + produto.categoria + "," 
-                + produto.tipo + "," 
-                + produto.peso + ","
-                + produto.marca;
+    public String toString(){
+        return this.nome + ", " 
+                + this.categoria + ", " 
+                + this.tipo + ", " 
+                + this.peso + ", "
+                + this.marca;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome) throws Exception {
+        if(nome.equals("")){
+            throw new Exception("Nome não pode ser vazio!");
+        }
         this.nome = nome;
     }
 
@@ -54,7 +59,10 @@ public class ProdutoBase implements Serializable{
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(String categoria) throws Exception {
+        if(categoria.equals("")){
+            throw new Exception("Categoria não pode ser vazio!");
+        }
         this.categoria = categoria;
     }
 
@@ -62,7 +70,10 @@ public class ProdutoBase implements Serializable{
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(String tipo) throws Exception {
+        if(tipo.equals("")){
+            throw new Exception("Tipo não pode ser vazio!");
+        }
         this.tipo = tipo;
     }
 
@@ -70,7 +81,10 @@ public class ProdutoBase implements Serializable{
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(double peso) throws Exception {
+        if(peso == 0){
+            throw new Exception("Peso deve ser maior que zero!");
+        }
         this.peso = peso;
     }
 
@@ -78,7 +92,10 @@ public class ProdutoBase implements Serializable{
         return marca;
     }
 
-    public void setMarca(String marca) {
+    public void setMarca(String marca) throws Exception {
+        if(marca.equals("")){
+            throw new Exception("Marca não pode ser vazio!");
+        }
         this.marca = marca;
     }
     

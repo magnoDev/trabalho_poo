@@ -89,6 +89,7 @@ public class ListaCompras implements Serializable {
             System.out.println(lista.next());
         }
         
+        System.out.println(this.valorTotal);
         
     }
     

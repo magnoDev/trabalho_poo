@@ -16,27 +16,29 @@ public class Produto extends ProdutoBase implements Serializable{
     private String dataValidade;
     private String lote;
 
-    public Produto(double valor, String dataValidade, String lote, String nome, 
-            String categoria, String tipo, double peso, String marca) {
+    public Produto(String nome, String categoria, String tipo, double peso, 
+            String marca, double valor, String dataValidade, String lote) throws Exception {
         super(nome, categoria, tipo, peso, marca);
-        this.valor = valor;
-        this.dataValidade = dataValidade;
-        this.lote = lote;
+        this.setValor(valor);
+        this.setDataValidade(dataValidade);
+        this.setLote(lote);
     }
     
-    public Produto(String valor, String dataValidade, String lote, String nome, 
-            String categoria, String tipo, String peso, String marca) {
+    public Produto(String nome, String categoria, String tipo, String peso, 
+            String marca, String valor, String dataValidade, String lote) throws Exception {
         super(nome, categoria, tipo, peso, marca);
-        this.valor = Double.parseDouble(valor);
-        this.dataValidade = dataValidade;
-        this.lote = lote;
+        this.setValor(Double.parseDouble(valor));
+        this.setDataValidade(dataValidade);
+        this.setLote(lote);
     }
     
-    public String toString(Produto produto){
-        return produto.toString() + "," 
-                + produto.valor + ","
-                + produto.dataValidade + ","
-                + produto.lote;
+    public String toString(){
+        String strProduto = super.toString();
+        strProduto +=  ", " 
+                + this.valor + ", "
+                + this.dataValidade + ", "
+                + this.lote;
+        return strProduto;
     }
 
     public double getValor() {
@@ -51,15 +53,24 @@ public class Produto extends ProdutoBase implements Serializable{
         return lote;
     }
 
-    public void setValor(double valor) {
+    public void setValor(double valor) throws Exception {
+        if(valor == 0){
+            throw new Exception("Valor não pode ser zero!");
+        }
         this.valor = valor;
     }
 
-    public void setDataValidade(String dataValidade) {
+    public void setDataValidade(String dataValidade) throws Exception {
+        if(dataValidade.equals("")){
+            throw new Exception("Data de validade não pode ser vazio!");
+        }
         this.dataValidade = dataValidade;
     }
 
-    public void setLote(String lote) {
+    public void setLote(String lote) throws Exception {
+        if(lote.equals("")){
+            throw new Exception("Lote não pode ser vazio!");
+        }
         this.lote = lote;
     }
     
