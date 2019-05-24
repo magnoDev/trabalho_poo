@@ -66,8 +66,8 @@ public class ProdutoTest {
         }catch(Exception ex){
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, ex.getMessage());
+            return null;
         }
-        return null;
     }
 
     /**
@@ -131,12 +131,22 @@ public class ProdutoTest {
      * Test of setValor method, of class Produto.
      */
     @Test
-    public void testSetValor() throws Exception {
-        System.out.println("setValor");
-        double valor = 1.0;
-        Produto instance = this.deafultProduct();
-        instance.setValor(valor);
-        assertEquals(instance.getValor(), valor, 0.0);
+    public void testSetValor() {
+            System.out.println("setValor");
+            double valor = 1.0;
+            Produto instance = this.deafultProduct();
+        try{
+            instance.setValor(valor);
+            assertEquals(valor, instance.getValor(), 0.0);
+            // deve disparar excessão na linha abaixo
+            instance.setValor(0.0);
+            instance.setValor(-1.0);
+            // caso não dispare, falha o teste
+            fail("Valores menores ou iguais a zero não devem ser aceitos");
+        }catch(Exception ex){
+            System.out.println("Disparei excessao");
+                    
+        }
     }
 
     /**

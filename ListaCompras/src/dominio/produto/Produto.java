@@ -54,7 +54,7 @@ public class Produto extends ProdutoBase implements Serializable{
     }
 
     public void setValor(double valor) throws Exception {
-        if(valor == 0){
+        if(valor <= 0){
             throw new Exception("Valor não pode ser zero!");
         }
         this.valor = valor;
