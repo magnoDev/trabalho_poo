@@ -70,7 +70,7 @@ public class ClienteTest {
      * Test of setNome method, of class Cliente.
      */
     @Test
-    public void testSetNome() {
+    public void testSetNome() throws Exception {
         System.out.println("setNome");
         String nome = "";
         Cliente instance = null;
@@ -97,7 +97,7 @@ public class ClienteTest {
      * Test of setEmail method, of class Cliente.
      */
     @Test
-    public void testSetEmail() {
+    public void testSetEmail() throws Exception {
         System.out.println("setEmail");
         String email = "";
         Cliente instance = null;
@@ -121,19 +121,6 @@ public class ClienteTest {
     }
 
     /**
-     * Test of setLogin method, of class Cliente.
-     */
-    @Test
-    public void testSetLogin() {
-        System.out.println("setLogin");
-        String login = "";
-        Cliente instance = null;
-        instance.setLogin(login);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getLocalizacao method, of class Cliente.
      */
     @Test
@@ -151,7 +138,7 @@ public class ClienteTest {
      * Test of setLocalizacao method, of class Cliente.
      */
     @Test
-    public void testSetLocalizacao() {
+    public void testSetLocalizacao() throws Exception {
         System.out.println("setLocalizacao");
         Localizacao localizacao = null;
         Cliente instance = null;
