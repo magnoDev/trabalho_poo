@@ -218,6 +218,7 @@ public class ClienteTest {
         try {
             instance.setDataNascimento(dataNascimento);
             assertEquals(dataNascimento, instance.getDataNascimento());
+            instance.setDataNascimento("");
             fail("Data de Nascimento vazia... NÃO PODE!!!");
         
         } catch (Exception ex){

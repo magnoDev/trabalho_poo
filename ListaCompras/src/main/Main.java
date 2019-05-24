@@ -43,7 +43,7 @@ public class Main {
 
         int continuar;
         do{
-            String produtoNome = JOptionPane.showInputDialog("Dgite o nome do produto que deseja inserir na lista: ");
+            String produtoNome = JOptionPane.showInputDialog("Digite o nome do produto que deseja inserir na lista: ");
             String preco = JOptionPane.showInputDialog("Insira o preço do " + produtoNome);
             String dataValidade = JOptionPane.showInputDialog("Insira a data de validade do "+ produtoNome);
             String lote = JOptionPane.showInputDialog("Insira o lote do " + produtoNome);
