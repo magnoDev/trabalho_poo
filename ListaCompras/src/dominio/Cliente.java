@@ -23,13 +23,13 @@ public class Cliente implements Serializable {
     String senha;
 
     public Cliente(String nome, String email, String dataNascimento, Localizacao localizacao, String senha) throws Exception {
-        this.nome = nome;
-        this.email = email;
-        this.login = email;
-        this.dataNascimento = dataNascimento;
-        this.localizacao = localizacao;
+        this.setNome(nome);
+        this.setEmail(email);
+        this.setDataNascimento(dataNascimento);
+        this.setLocalizacao(localizacao);
         this.setSenha(senha);
     } 
+
 
     Cliente() {}
     
@@ -42,34 +42,41 @@ public class Cliente implements Serializable {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nome) throws Exception {
+        if (nome.equals("")){
+            throw new Exception("Nome não pode ser vazio");
+        }else{
+            this.nome = nome;
+        }
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-        this.login = email;
+    public void setEmail(String email) throws Exception {
+        if (email.equals("")){
+            throw new Exception("Email não pode ser vazi0");
+        }else{        
+            this.email = email;
+            this.login = email;
+        }
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-        this.email = login;
-    }
-
     public Localizacao getLocalizacao() {
         return localizacao;
     }
 
-    public void setLocalizacao(Localizacao localizacao) {
-        this.localizacao = localizacao;
+    public void setLocalizacao(Localizacao localizacao) throws Exception {
+        if (localizacao == null){
+            throw new Exception("Localização não pode ser vazia");
+        }else{
+            this.localizacao = localizacao;
+        }    
     }
 
     public String getSenha() {
@@ -87,10 +94,14 @@ public class Cliente implements Serializable {
     public String getDataNascimento() {
         return dataNascimento;
     }
-    
-    
-    
-    
-    
+
+    public void setDataNascimento(String dataNascimento) throws Exception {
+        if (dataNascimento.equals("")){
+            throw new Exception("Data de nascimento não pode ser vazia");
+        }else{
+            this.dataNascimento = dataNascimento;
+        }
+    }    
+       
 }
 

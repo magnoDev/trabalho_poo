@@ -206,4 +206,23 @@ public class ClienteTest {
         fail("The test case is a prototype.");
     }
     
+    /**
+     * Test of setDataNascimento method, of class Cliente.
+     */
+    
+    @Test
+    public void testSetDataNascimento(){
+        System.out.println("setDataNascimento");
+        String dataNascimento = "30/08/89";
+        Cliente instance = new Cliente();
+        try {
+            instance.setDataNascimento(dataNascimento);
+            assertEquals(dataNascimento, instance.getDataNascimento());
+            fail("Data de Nascimento vazia... NÃO PODE!!!");
+        
+        } catch (Exception ex){
+            Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
