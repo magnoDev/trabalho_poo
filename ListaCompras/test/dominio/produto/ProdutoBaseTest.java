@@ -5,6 +5,10 @@
  */
 package dominio.produto;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import main.Main;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,6 +21,12 @@ import static org.junit.Assert.*;
  * @author david
  */
 public class ProdutoBaseTest {
+    
+    String nome = "nome";
+    String categoria = "categoria";
+    String tipo = "tipo";
+    String peso = "1.2";
+    String marca = "marca";
     
     public ProdutoBaseTest() {
     }
@@ -36,6 +46,23 @@ public class ProdutoBaseTest {
     @After
     public void tearDown() {
     }
+    
+    private ProdutoBase deafultBaseProduct(){
+        try{
+            ProdutoBase produtoBase = new ProdutoBase(
+                this.nome, 
+                this.categoria, 
+                this.tipo, 
+                this.peso, 
+                this.marca
+            );
+            return produtoBase;
+        }catch(Exception ex){
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+            return null;
+        }
+    }
 
     /**
      * Test of toString method, of class ProdutoBase.
@@ -43,13 +70,14 @@ public class ProdutoBaseTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        ProdutoBase produto = null;
-        ProdutoBase instance = null;
-        String expResult = "";
+        ProdutoBase instance = this.deafultBaseProduct();
+        String expResult = this.nome + ", " 
+                + this.categoria + ", " 
+                + this.tipo + ", " 
+                + this.peso + ", " 
+                + this.marca;
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -58,25 +86,33 @@ public class ProdutoBaseTest {
     @Test
     public void testGetNome() {
         System.out.println("getNome");
-        ProdutoBase instance = null;
-        String expResult = "";
+        ProdutoBase instance = this.deafultBaseProduct();
+        String expResult = this.nome;
         String result = instance.getNome();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of setNome method, of class ProdutoBase.
      */
     @Test
-    public void testSetNome() throws Exception {
-        System.out.println("setNome");
-        String nome = "";
-        ProdutoBase instance = null;
-        instance.setNome(nome);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testSetNome(){
+        try {
+            System.out.println("setNome");
+            String nome = "testSetNome";
+            ProdutoBase instance = this.deafultBaseProduct();
+            instance.setNome(nome);
+            String expResult = nome;
+            String result = instance.getNome();
+            assertEquals(expResult, result);
+            
+            nome = "";
+            instance.setNome(nome);
+            fail("Método não deve permitir que o nome seja vazio");
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutoBaseTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -85,25 +121,32 @@ public class ProdutoBaseTest {
     @Test
     public void testGetCategoria() {
         System.out.println("getCategoria");
-        ProdutoBase instance = null;
-        String expResult = "";
+        ProdutoBase instance = this.deafultBaseProduct();
+        String expResult = this.categoria;
         String result = instance.getCategoria();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of setCategoria method, of class ProdutoBase.
      */
     @Test
-    public void testSetCategoria() throws Exception {
-        System.out.println("setCategoria");
-        String categoria = "";
-        ProdutoBase instance = null;
-        instance.setCategoria(categoria);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testSetCategoria(){
+        try {
+            System.out.println("setNome");
+            String categoria = "testCategoria";
+            ProdutoBase instance = this.deafultBaseProduct();
+            instance.setCategoria(categoria);
+            String expResult = categoria;
+            String result = instance.getNome();
+            assertEquals(expResult, result);
+            
+            nome = "";
+            instance.setNome(nome);
+            fail("Método não deve permitir que o nome seja vazio");
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutoBaseTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -112,12 +155,10 @@ public class ProdutoBaseTest {
     @Test
     public void testGetTipo() {
         System.out.println("getTipo");
-        ProdutoBase instance = null;
-        String expResult = "";
+        ProdutoBase instance = this.deafultBaseProduct();
+        String expResult = this.tipo;
         String result = instance.getTipo();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
