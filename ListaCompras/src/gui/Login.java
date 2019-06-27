@@ -31,6 +31,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        emailCampoLogin.grabFocus();
     }
 
     /**
@@ -199,6 +200,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarBotaoActionPerformed
