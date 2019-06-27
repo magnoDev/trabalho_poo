@@ -5,6 +5,21 @@
  */
 package gui;
 
+import dominio.Cliente;
+import dao.*;
+
+import java.sql.Connection;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+// Necessários para trabalhar as mensagens que aparecem na tela.
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.PLAIN_MESSAGE;
+import static javax.swing.JOptionPane.QUESTION_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+
 /**
  *
  * @author magno
@@ -61,8 +76,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        passwordCampoLogin.setText("jPasswordField1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -71,16 +84,16 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(emailCampoLogin)
-                    .addComponent(passwordCampoLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(passwordCampoLogin)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 105, Short.MAX_VALUE)
+                        .addComponent(entrarBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(entrarBotao, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +108,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(passwordCampoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(entrarBotao)
-                .addGap(27, 27, 27))
+                .addGap(24, 24, 24))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Novo por aqui?"));
@@ -108,7 +121,6 @@ public class Login extends javax.swing.JFrame {
 
         criarContaBotao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/contact-icon.png"))); // NOI18N
         criarContaBotao.setText("Criar");
-        criarContaBotao.setActionCommand("Criar");
         criarContaBotao.setMaximumSize(new java.awt.Dimension(85, 46));
         criarContaBotao.setMinimumSize(new java.awt.Dimension(85, 46));
         criarContaBotao.addActionListener(new java.awt.event.ActionListener() {
@@ -191,10 +203,129 @@ public class Login extends javax.swing.JFrame {
 
     private void entrarBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarBotaoActionPerformed
         // TODO add your handling code here:
+        Cliente user = new Cliente();
+        
+        try {
+            user.setEmail(emailCampoLogin.getText());
+            user.setSenha(Integer.parseInt(String.valueOf(passwordCampoLogin.getPassword())));
+
+        
+            Connection con = null;        
+            con = ConectarBD.abrirConexao();        
+            ConsultaBD verificaUsuario = new ConsultaBD(con);
+
+            if(verificaUsuario.verificaUsuarioSenha(user)){
+                try {
+                    user.setNome(verificaUsuario.retornaNomeUsuario(user));
+                } catch (Exception ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                dispose();
+
+            }else{
+                JOptionPane.showMessageDialog(null, "Login inválido!", "Erro", 
+                                                                     ERROR_MESSAGE);
+
+                if(JOptionPane.showConfirmDialog(null, 
+                                          "Deseja se cadastar?", "Primeiro acesso?", 
+                                             YES_NO_OPTION, QUESTION_MESSAGE) == 0){
+
+                    criaEmailCampoLogin.setText(emailCampoLogin.getText());
+                    emailCampoLogin.setText(null);
+                    passwordCampoLogin.setText(null);
+                    criaNomeCampoLogin.setText(null);
+                    criaNomeCampoLogin.grabFocus();
+                    criaSenhaCampoLogin.setText(null);
+                    confirmaSenhaCampoLogin.setText(null);
+
+
+
+                }else{
+                    emailCampoLogin.setText(null);
+                    emailCampoLogin.grabFocus();
+                    passwordCampoLogin.setText(null);
+                }
+            }
+            user = null;
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_entrarBotaoActionPerformed
 
     private void criarContaBotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarContaBotaoActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            Cliente user = new Cliente(criaNomeCampoLogin.getText(), 
+                            criaEmailCampoLogin.getText(), 
+                            Integer.parseInt(String.valueOf(criaSenhaCampoLogin.getPassword())));
+            
+            Connection con = null;        
+            con = ConectarBD.abrirConexao();        
+            ConsultaBD verificaUsuario = new ConsultaBD(con);
+            InsereBD insereUsuario = new InsereBD(con);
+
+            if(!criaNomeCampoLogin.getText().isEmpty() 
+                    && !criaEmailCampoLogin.getText().isEmpty()
+                    && criaSenhaCampoLogin.getPassword().length > 0 
+                    && confirmaSenhaCampoLogin.getPassword().length > 0){
+
+                if(Arrays.equals(criaSenhaCampoLogin.getPassword(), confirmaSenhaCampoLogin.getPassword())){
+                    if(verificaUsuario.verificaUsuario(user)){
+                        JOptionPane.showMessageDialog(null, 
+                          "Usuario já existe! Faça o login.", "Erro",ERROR_MESSAGE);
+
+                        emailCampoLogin.setText(criaEmailCampoLogin.getText());
+                        criaNomeCampoLogin.setText(null);
+                        criaEmailCampoLogin.setText(null);
+                        criaSenhaCampoLogin.setText(null);
+                        confirmaSenhaCampoLogin.setText(null);
+                        passwordCampoLogin.grabFocus();
+
+                    }else{
+                        
+                        if(insereUsuario.inserirUsuario(user)){
+                            JOptionPane.showMessageDialog(null, 
+                                    "Usuário registrado com sucesso! ", "Sucesso", PLAIN_MESSAGE);
+
+                            JOptionPane.showMessageDialog(null,
+                                            user.getNome()
+                                                            +", faça seu login!", 
+                                                              "Sucesso", 
+                                                              PLAIN_MESSAGE);
+                            emailCampoLogin.setText(criaEmailCampoLogin.getText());
+                            emailCampoLogin.grabFocus();
+                            criaNomeCampoLogin.setText(null);
+                            criaEmailCampoLogin.setText(null);
+                            criaSenhaCampoLogin.setText(null);
+                            confirmaSenhaCampoLogin.setText(null);
+   
+                        }else{
+                            JOptionPane.showMessageDialog(null,
+                                            "Erro ao gravar os dados!"
+                                            + "Tente novamente!", 
+                                            "Erro",ERROR_MESSAGE);
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, 
+                           "Senha não confere! Tente novamente.", 
+                           "Erro",ERROR_MESSAGE);
+
+                    criaSenhaCampoLogin.setText(null);
+                    confirmaSenhaCampoLogin.setText(null);
+                    criaSenhaCampoLogin.grabFocus();
+                }
+
+            }else{
+                JOptionPane.showMessageDialog(null, 
+                           "Necessário peencher os campos de cadastro!", 
+                           "Erro",ERROR_MESSAGE);
+                criaNomeCampoLogin.grabFocus();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_criarContaBotaoActionPerformed
 
     /**

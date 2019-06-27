@@ -17,23 +17,17 @@ public class Cliente implements Serializable {
     String nome;
     String email;
     String login;
-    String dataNascimento;
-    Localizacao localizacao;
-    String senha;
+    int senha;
 
-    public Cliente(String nome, String email, String dataNascimento, Localizacao localizacao, String senha) throws Exception {
+    public Cliente(String nome, String email, int senha) throws Exception {
         this.setNome(nome);
         this.setEmail(email);
-        this.setDataNascimento(dataNascimento);
-        this.setLocalizacao(localizacao);
         this.setSenha(senha);
     } 
 
 
-    Cliente() {}
+    public Cliente() {}
     
-    public void salvar(Cliente cliente) throws IOException{}
-
     public String getNome() {
         return nome;
     }
@@ -63,41 +57,17 @@ public class Cliente implements Serializable {
         return login;
     }
 
-    public Localizacao getLocalizacao() {
-        return localizacao;
-    }
-
-    public void setLocalizacao(Localizacao localizacao) throws Exception {
-        if (localizacao == null){
-            throw new Exception("Localização não pode ser vazia");
-        }else{
-            this.localizacao = localizacao;
-        }    
-    }
-
-    public String getSenha() {
+    public int getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) throws Exception {
-        if (senha.equals("")){
+    public void setSenha(int senha) throws Exception {
+        if (senha == 0){
             throw new Exception("Senha não pode ser vazia");
         }else{
             this.senha = senha;
         }
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) throws Exception {
-        if (dataNascimento.equals("")){
-            throw new Exception("Data de nascimento não pode ser vazia");
-        }else{
-            this.dataNascimento = dataNascimento;
-        }
-    }    
+    }  
        
 }
 

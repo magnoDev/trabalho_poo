@@ -26,8 +26,6 @@ public class ListaCompras implements Serializable {
     
     }
     
-    public void salvar(ListaCompras listaCompras) throws IOException{ }
-    
     public String getNome_lista() {
         return nome_lista;
     }

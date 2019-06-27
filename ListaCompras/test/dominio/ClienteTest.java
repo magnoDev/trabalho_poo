@@ -47,7 +47,6 @@ public class ClienteTest {
         System.out.println("salvar");
         Cliente cliente = null;
         Cliente instance = null;
-        instance.salvar(cliente);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -121,33 +120,6 @@ public class ClienteTest {
     }
 
     /**
-     * Test of getLocalizacao method, of class Cliente.
-     */
-    @Test
-    public void testGetLocalizacao() {
-        System.out.println("getLocalizacao");
-        Cliente instance = null;
-        Localizacao expResult = null;
-        Localizacao result = instance.getLocalizacao();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setLocalizacao method, of class Cliente.
-     */
-    @Test
-    public void testSetLocalizacao() throws Exception {
-        System.out.println("setLocalizacao");
-        Localizacao localizacao = null;
-        Cliente instance = null;
-        instance.setLocalizacao(localizacao);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getSenha method, of class Cliente.
      */
     @Test
@@ -155,7 +127,7 @@ public class ClienteTest {
         System.out.println("getSenha");
         Cliente instance = null;
         String expResult = "";
-        String result = instance.getSenha();
+        int result = instance.getSenha();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -167,50 +139,15 @@ public class ClienteTest {
     @Test
     public void testSetSenha() {
         System.out.println("setSenha");
-        String senha = "123";
+        int senha = 123;
         Cliente instance = new Cliente();
         try {
             instance.setSenha(senha);
             assertEquals(senha, instance.getSenha());
-            instance.setSenha("");
+            instance.setSenha(0);
             fail("Senha vazia.. NÃO PODE!!!");
         } catch (Exception ex) {
             Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    /**
-     * Test of getDataNascimento method, of class Cliente.
-     */
-    @Test
-    public void testGetDataNascimento() {
-        System.out.println("getDataNascimento");
-        Cliente instance = null;
-        String expResult = "";
-        String result = instance.getDataNascimento();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
-    /**
-     * Test of setDataNascimento method, of class Cliente.
-     */
-    
-    @Test
-    public void testSetDataNascimento(){
-        System.out.println("setDataNascimento");
-        String dataNascimento = "30/08/89";
-        Cliente instance = new Cliente();
-        try {
-            instance.setDataNascimento(dataNascimento);
-            assertEquals(dataNascimento, instance.getDataNascimento());
-            instance.setDataNascimento("");
-            fail("Data de Nascimento vazia... NÃO PODE!!!");
-        
-        } catch (Exception ex){
-            Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+    }    
 }

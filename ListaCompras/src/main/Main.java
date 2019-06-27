@@ -26,8 +26,8 @@ public static void main(String[] args) {
         
         if(con != null){
             
-            JOptionPane.showMessageDialog(null, "Sucesso ao conectar ao Banco.",
-                                                        "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Sucesso ao conectar ao Banco.",
+            //                                            "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
             new Login().setVisible(true);         
             
         }else{

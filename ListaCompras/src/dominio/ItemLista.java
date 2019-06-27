@@ -20,8 +20,6 @@ public class ItemLista implements Serializable {
     public ItemLista(){
     
     }
-    
-    public void salvar(ItemLista item) throws IOException{ }  
 
     public Produto getProduto() {
         return produto;
