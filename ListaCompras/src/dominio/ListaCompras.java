@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import persistencia.PersistenciaArquivo;
 
 /**
  *
@@ -27,10 +26,7 @@ public class ListaCompras implements Serializable {
     
     }
     
-    public void salvar(ListaCompras listaCompras) throws IOException{
-        PersistenciaArquivo persistencia = new PersistenciaArquivo();
-        persistencia.salvar(listaCompras);
-    }
+    public void salvar(ListaCompras listaCompras) throws IOException{ }
     
     public String getNome_lista() {
         return nome_lista;

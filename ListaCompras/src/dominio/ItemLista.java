@@ -8,7 +8,6 @@ package dominio;
 import dominio.produto.Produto;
 import java.io.IOException;
 import java.io.Serializable;
-import persistencia.PersistenciaArquivo;
 
 /**
  *
@@ -22,10 +21,7 @@ public class ItemLista implements Serializable {
     
     }
     
-    public void salvar(ItemLista item) throws IOException{
-        PersistenciaArquivo persistencia = new PersistenciaArquivo();
-        persistencia.salvar(item);
-    }  
+    public void salvar(ItemLista item) throws IOException{ }  
 
     public Produto getProduto() {
         return produto;
