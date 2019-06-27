@@ -8,7 +8,7 @@ package main;
 
 import java.sql.*;
 import dao.ConectarBD;
-import java.io.IOException;
+import gui.Login;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
@@ -28,7 +28,7 @@ public static void main(String[] args) {
             
             JOptionPane.showMessageDialog(null, "Sucesso ao conectar ao Banco.",
                                                         "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
-            //new cpLogin().setVisible(true);         
+            new Login().setVisible(true);         
             
         }else{
             JOptionPane.showMessageDialog(null, "Erro ao conectar ao Banco.",
