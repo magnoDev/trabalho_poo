@@ -216,7 +216,10 @@ public class Login extends javax.swing.JFrame {
 
             if(verificaUsuario.verificaUsuarioSenha(user)){
                 try {
-                    user.setNome(verificaUsuario.retornaNomeUsuario(user));
+                    user.setNome(verificaUsuario.retornaNomeUsuario(user));                    
+                    MenuPrincipal main = new MenuPrincipal();
+                    main.setVisible(true);
+                    main.recuperaUsuario(user);
                 } catch (Exception ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
