@@ -24,7 +24,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
-        criaProduto.grabFocus();
+        criaLista.grabFocus();
     }
 
     /**
@@ -45,7 +45,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         nomeUser = new javax.swing.JLabel();
         logout = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        criaLista = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -138,8 +138,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/cart-add.png"))); // NOI18N
-        jButton1.setText("Criar Lista");
+        criaLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/cart-add-icon.png"))); // NOI18N
+        criaLista.setText("Criar Lista");
+        criaLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                criaListaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/shopping-cart-icon.png"))); // NOI18N
@@ -163,7 +168,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(67, 67, 67))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(criaLista, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -174,11 +179,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(logout)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(nomeUser))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)
+                        .addComponent(nomeUser)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addComponent(criaLista))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,13 +220,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         new Login().setVisible(true);
         dispose();
         }else{
-            criaProduto.grabFocus();
+            criaLista.grabFocus();
         }
     }//GEN-LAST:event_logoutActionPerformed
 
     private void apagarlistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarlistaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_apagarlistaActionPerformed
+
+    private void criaListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criaListaActionPerformed
+        // TODO add your handling code here:
+        new CriaLista().setVisible(true);
+    }//GEN-LAST:event_criaListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,7 +271,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirlistabotao;
     private javax.swing.JButton apagarlista;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton criaLista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
