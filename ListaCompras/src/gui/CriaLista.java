@@ -33,9 +33,9 @@ public class CriaLista extends javax.swing.JFrame {
         supermercado = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        addproduto = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        addProduto = new javax.swing.JButton();
+        removeItem = new javax.swing.JButton();
+        criarLista = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,22 +76,22 @@ public class CriaLista extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        addproduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/addition-icon.png"))); // NOI18N
-        addproduto.setText("Add Produto");
-        addproduto.addActionListener(new java.awt.event.ActionListener() {
+        addProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/addition-icon.png"))); // NOI18N
+        addProduto.setText("Add Produto");
+        addProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addprodutoActionPerformed(evt);
+                addProdutoActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/Open-icon.png"))); // NOI18N
-        jButton2.setText("Remover da lista");
+        removeItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/Open-icon.png"))); // NOI18N
+        removeItem.setText("Remover da lista");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/cart-add-icon2.png"))); // NOI18N
-        jButton1.setText("Criar!");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        criarLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/cart-add-icon2.png"))); // NOI18N
+        criarLista.setText("Criar!");
+        criarLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                criarListaActionPerformed(evt);
             }
         });
 
@@ -113,11 +113,10 @@ public class CriaLista extends javax.swing.JFrame {
                                     .addComponent(nomelista, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(supermercado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(addproduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(removeItem, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(criarLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
@@ -139,25 +138,25 @@ public class CriaLista extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(addproduto)
+                                .addComponent(addProduto)
                                 .addGap(39, 39, 39)
-                                .addComponent(jButton2)
+                                .addComponent(removeItem)
                                 .addGap(77, 77, 77))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(criarLista)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addprodutoActionPerformed
+    private void addProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProdutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addprodutoActionPerformed
+    }//GEN-LAST:event_addProdutoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void criarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarListaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_criarListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,14 +194,14 @@ public class CriaLista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addproduto;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton addProduto;
+    private javax.swing.JButton criarLista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField nomelista;
+    private javax.swing.JButton removeItem;
     private javax.swing.JTextField supermercado;
     // End of variables declaration//GEN-END:variables
 }
