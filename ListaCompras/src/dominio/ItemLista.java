@@ -16,9 +16,24 @@ import java.io.Serializable;
 public class ItemLista implements Serializable {
     private Produto produto;
     private int quantidade;
+    private double preco;
     
     public ItemLista(){
     
+    }
+
+    public ItemLista(Produto produto, int quantidade, double preco) {
+        this.produto = produto;
+        this.quantidade = quantidade;
+        this.preco = preco;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
     }
 
     public Produto getProduto() {
