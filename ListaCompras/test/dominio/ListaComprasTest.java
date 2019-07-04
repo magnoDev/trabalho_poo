@@ -45,7 +45,7 @@ public class ListaComprasTest {
         System.out.println("getNome_lista");
         ListaCompras instance = new ListaCompras();
         String expResult = "";
-        String result = instance.getNome_lista();
+        String result = instance.getNomeLista();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -59,7 +59,7 @@ public class ListaComprasTest {
         System.out.println("setNome_lista");
         String nome_lista = "";
         ListaCompras instance = new ListaCompras();
-        instance.setNome_lista(nome_lista);
+        instance.ssetNomeListanome_lista);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
