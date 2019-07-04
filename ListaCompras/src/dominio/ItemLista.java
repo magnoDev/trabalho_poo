@@ -21,28 +21,43 @@ public class ItemLista implements Serializable {
     public double getValor() {
         return valor;
     }
+    
+    public ItemLista(){        
+    }
 
-    public void setValor(double valor) {
+    public ItemLista(Produto produto, int quantidade, double valor) {
+        this.produto = produto;
+        this.quantidade = quantidade;
         this.valor = valor;
     }
-    
-    public ItemLista(){
-    
+
+    public void setValor(double preco) throws Exception {
+            this.valor = this.produto.getValor() * this.quantidade;
     }
 
     public Produto getProduto() {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setProduto(Produto produto) throws Exception {
+        
+        if (!(produto instanceof Produto)){
+            throw new Exception("Produto inválido");
+        }else{
+            this.produto = produto;
+        }  
     }
 
     public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidade(int quantidade) throws Exception {
+        
+        if (quantidade==0){
+            throw new Exception("Quantidade não pode ser vazio");
+        }else{
+            this.quantidade = quantidade;
+        }        
     }
 }

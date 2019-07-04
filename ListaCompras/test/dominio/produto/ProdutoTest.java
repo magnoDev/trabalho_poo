@@ -145,7 +145,7 @@ public class ProdutoTest {
             fail("Valores menores ou iguais a zero não devem ser aceitos");
         }catch(Exception ex){
             System.out.println("Disparei excessao");
-                    
+            Logger.getLogger(ProdutoBaseTest.class.getName()).log(Level.SEVERE, null, ex);       
         }
     }
 

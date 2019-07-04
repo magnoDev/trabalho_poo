@@ -58,7 +58,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
             },
             new String [] {
                 "Nome", "Data", "Supermercado"

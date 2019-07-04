@@ -23,6 +23,7 @@ public class Cliente implements Serializable {
         this.setNome(nome);
         this.setEmail(email);
         this.setSenha(senha);
+        this.setLogin(email);
     } 
 
 
@@ -50,6 +51,14 @@ public class Cliente implements Serializable {
         }else{        
             this.email = email;
             this.login = email;
+        }
+    }
+    
+    public void setLogin(String login) throws Exception {
+        if ("".equals(login)){
+            throw new Exception("Login não pode ser vazio");
+        }else{
+            this.login = login;
         }
     }
 

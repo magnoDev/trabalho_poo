@@ -19,7 +19,6 @@ import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 
-
 /**
  *
  * @author magno
@@ -330,10 +329,12 @@ public class CriaLista extends javax.swing.JFrame {
             
             ListaCompras listaCompras = new ListaCompras();
             
-            listaCompras.setNome_lista(nomeLista.getText());
-            listaCompras.setSupermercado(supermercado.getText());
-            listaCompras.setValorTotal(Double.parseDouble(valorTotalLista.getText()));
-            
+            try {
+                listaCompras.setNomeLista(nomeLista.getText());
+                listaCompras.setSupermercado(supermercado.getText());
+            } catch (Exception ex) {
+                Logger.getLogger(CriaLista.class.getName()).log(Level.SEVERE, null, ex);
+            }
                         
             for(int i = 0; i < defTable.getRowCount(); i++){
                 try {
@@ -423,7 +424,7 @@ public class CriaLista extends javax.swing.JFrame {
     private void quantidadeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantidadeItemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_quantidadeItemActionPerformed
-
+  
     /**
      * @param args the command line arguments
      */

@@ -17,10 +17,14 @@ import java.util.List;
  */
 public class ListaCompras implements Serializable {
     
-    private String nome_lista;
+    private String nomeLista;
     private Cliente cliente;
     private String supermercado;
     private final List<ItemLista> itens = new ArrayList<>();
+
+    public List<ItemLista> getItens() {
+        return itens;
+    }
 
     public String getSupermercado() {
         return supermercado;
@@ -32,68 +36,81 @@ public class ListaCompras implements Serializable {
     private double valorTotal = 0.0;
     
     public ListaCompras(){
-    
+     this.valorTotal = 0.0;
     }
     
-    public String getNome_lista() {
-        return nome_lista;
+    public String getNomeLista() {
+        return nomeLista;
     }
 
-    public void setNome_lista(String nome_lista) {
-        this.nome_lista = nome_lista;
+    public void setNomeLista(String nomeLista) throws Exception {
+        
+        if (nomeLista.equals("")){
+            throw new Exception("Nome da lista não pode ser vazio");
+        }else{
+            this.nomeLista = nomeLista;
+        }
+        
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(Cliente cliente) throws Exception {
+        
+        if (!(cliente instanceof Cliente)){
+            throw new Exception("Cliente inválido");
+        }else{
+            this.cliente = cliente;
+        }
     }
 
     public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(double valorTotal) {
+    private void setValorTotal(double valorTotal){
         this.valorTotal = valorTotal;
     }
         
-    public void adicionaItem(ItemLista item){
-        itens.add(item);
-        setValorTotal((getValorTotal()+(item.getQuantidade() * item.getProduto().getValor())));
+    public void adicionaItem(ItemLista item) throws Exception{
+        
+        try{
+            this.itens.add(item);
+            this.setValorTotal((this.valorTotal + ( item.getValor() )));
+        }
+        catch(Exception ex){
+            throw ex;
+        }
     }
     
-    public int getIndexItemLista(ItemLista item){
+    public int getIndexItemLista(ItemLista item) throws Exception{
         
         int indexItemLista = 0;
         String nomeItem = item.getProduto().getNome();
-        String nomeItemNaLista = this.itens.get(indexItemLista).getProduto().getNome();
+        String nomeItemNaLista;
         
-        while(!nomeItem.equals(nomeItemNaLista) || indexItemLista < this.itens.size()){
-            indexItemLista++;
+        for(indexItemLista = 0; indexItemLista < this.itens.size(); indexItemLista++){
             nomeItemNaLista = this.itens.get(indexItemLista).getProduto().getNome();
+            if(nomeItem.equals(nomeItemNaLista)){
+                return indexItemLista;
+            }
         }
         
-        return indexItemLista;
+        throw new Exception("Item não encontrado");
         
     }
     
-    public void removeItem(ItemLista item){
-        itens.remove(getIndexItemLista(item));
-        setValorTotal((getValorTotal()-(item.getQuantidade() * item.getProduto().getValor())));
-    }
-    
-    public void imprimeLista(){
-    
-        Iterator lista = this.itens.iterator();
+    public void removeItem(ItemLista item) throws Exception{
         
-        while(lista.hasNext()){
-            System.out.println(lista.next());
+        try{
+            this.itens.remove(getIndexItemLista(item));
+            setValorTotal((getValorTotal()-( item.getValor() )));
+
         }
-        
-        System.out.println(this.valorTotal);
-        
-    }
-    
+        catch(Exception ex){
+            throw ex;
+        }
+    }    
 }
