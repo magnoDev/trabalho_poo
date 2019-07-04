@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ListaCompras implements Serializable {
     
-    private String nome_lista;
+    private String nomeLista;
     private Cliente cliente;
     private final List<ItemLista> itens = new ArrayList<>();
     private double valorTotal = 0.0;
@@ -26,33 +26,55 @@ public class ListaCompras implements Serializable {
     
     }
     
-    public String getNome_lista() {
-        return nome_lista;
+    public String getNomeLista() {
+        return nomeLista;
     }
 
-    public void setNome_lista(String nome_lista) {
-        this.nome_lista = nome_lista;
+    public void setNomeLista(String nomeLista) throws Exception {
+        
+        if (nomeLista.equals("")){
+            throw new Exception("Nome da lista não pode ser vazio");
+        }else{
+            this.nomeLista = nomeLista;
+        }
+        
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setCliente(Cliente cliente) throws Exception {
+        
+        if (!(cliente instanceof Cliente)){
+            throw new Exception("Cliente inválido");
+        }else{
+            this.cliente = cliente;
+        }
     }
 
     public double getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
+    public void setValorTotal(double valorTotal) throws Exception {
+        
+        if (valorTotal==0.0){
+            throw new Exception("Valor total não pode ser zero");
+        }else{
+            this.valorTotal = valorTotal;
+        }
     }
         
-    public void adicionaItem(ItemLista item){
-        itens.add(item);
-        setValorTotal((getValorTotal()+(item.getQuantidade() * item.getProduto().getValor())));
+    public void adicionaItem(ItemLista item) throws Exception{
+        
+        try{
+            this.itens.add(item);
+            setValorTotal((getValorTotal()+(item.getQuantidade() * item.getProduto().getValor())));
+        }
+        catch(Exception ex){
+            throw ex;
+        }
     }
     
     public int getIndexItemLista(ItemLista item){
@@ -70,10 +92,18 @@ public class ListaCompras implements Serializable {
         
     }
     
-    public void removeItem(ItemLista item){
-        itens.remove(getIndexItemLista(item));
-        setValorTotal((getValorTotal()-(item.getQuantidade() * item.getProduto().getValor())));
+    public void removeItem(ItemLista item) throws Exception{
+        
+        try{
+            this.itens.remove(getIndexItemLista(item));
+            setValorTotal((getValorTotal()-(item.getQuantidade() * item.getProduto().getValor())));
+
+        }
+        catch(Exception ex){
+            throw ex;
+        }
     }
+        
     
     public void imprimeLista(){
     
