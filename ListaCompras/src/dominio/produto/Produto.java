@@ -15,6 +15,10 @@ public class Produto extends ProdutoBase implements Serializable{
     private double valor;
     private String dataValidade;
     private String lote;
+    
+    public Produto() {
+        super();
+    }
 
     public Produto(String nome, String categoria, String tipo, double peso, 
             String marca, double valor, String dataValidade, String lote) throws Exception {
