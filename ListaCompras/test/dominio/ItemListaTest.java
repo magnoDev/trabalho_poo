@@ -48,11 +48,14 @@ public class ItemListaTest {
     public void testGetPreco() {
         System.out.println("getPreco");
         ItemLista instance = new ItemLista();
-        double expResult = 0.0;
-        double result = instance.getPreco();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        double expResult = 5.0;
+        try {
+            instance.setPreco(expResult);
+            double result = instance.getPreco();
+            assertEquals(expResult, result, 0.0);
+        } catch (Exception ex) {
+            Logger.getLogger(ItemListaTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -83,11 +86,18 @@ public class ItemListaTest {
     public void testGetProduto() {
         System.out.println("getProduto");
         ItemLista instance = new ItemLista();
-        Produto expResult = null;
-        Produto result = instance.getProduto();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Produto produto = new Produto();
+        try {
+            instance.setProduto(produto);
+            assertEquals(produto, instance.getProduto());
+            
+            // passando um parametro invalido
+            instance.setProduto(null);
+            fail("Produto deve aceitar somente objetos do tipo Produto");
+        } catch (Exception ex) {
+            Logger.getLogger(ItemListaTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -96,11 +106,13 @@ public class ItemListaTest {
     @Test
     public void testSetProduto() {
         System.out.println("setProduto");
-        Produto produto = null;
+        Produto produto = new Produto();
         ItemLista instance = new ItemLista();
-        instance.setProduto(produto);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {
+            instance.setProduto(produto);
+        } catch (Exception ex) {
+            Logger.getLogger(ItemListaTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -110,11 +122,14 @@ public class ItemListaTest {
     public void testGetQuantidade() {
         System.out.println("getQuantidade");
         ItemLista instance = new ItemLista();
-        int expResult = 0;
-        int result = instance.getQuantidade();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int expResult = 2;
+        try {
+            instance.setQuantidade(expResult);
+            int result = instance.getQuantidade();
+            assertEquals(expResult, result);
+        } catch (Exception ex) {
+            Logger.getLogger(ItemListaTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -123,11 +138,16 @@ public class ItemListaTest {
     @Test
     public void testSetQuantidade() {
         System.out.println("setQuantidade");
-        int quantidade = 0;
+        int quantidade = 1;
         ItemLista instance = new ItemLista();
-        instance.setQuantidade(quantidade);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {
+            instance.setQuantidade(quantidade);
+            
+            instance.setQuantidade(0);
+            fail("Quantidade não pode ser zero");
+        } catch (Exception ex) {
+            Logger.getLogger(ItemListaTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

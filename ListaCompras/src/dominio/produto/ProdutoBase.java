@@ -18,6 +18,8 @@ public class ProdutoBase implements Serializable{
     private double peso;
     private String marca;
     
+    public ProdutoBase(){}
+    
     public ProdutoBase(String nome, String categoria, String tipo, double peso, String marca) throws Exception{
         this.setNome(nome);
         this.setCategoria(categoria);

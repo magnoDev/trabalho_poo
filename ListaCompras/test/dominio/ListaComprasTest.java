@@ -5,6 +5,8 @@
  */
 package dominio;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -59,7 +61,11 @@ public class ListaComprasTest {
         System.out.println("setNome_lista");
         String nome_lista = "";
         ListaCompras instance = new ListaCompras();
-        instance.ssetNomeListanome_lista);
+        try {
+            instance.setNomeLista(nome_lista);
+        } catch (Exception ex) {
+            Logger.getLogger(ListaComprasTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -86,7 +92,11 @@ public class ListaComprasTest {
         System.out.println("setCliente");
         Cliente cliente = null;
         ListaCompras instance = new ListaCompras();
-        instance.setCliente(cliente);
+        try {
+            instance.setCliente(cliente);
+        } catch (Exception ex) {
+            Logger.getLogger(ListaComprasTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -113,7 +123,11 @@ public class ListaComprasTest {
         System.out.println("setValorTotal");
         double valorTotal = 0.0;
         ListaCompras instance = new ListaCompras();
-        instance.setValorTotal(valorTotal);
+        try {
+            instance.setValorTotal(valorTotal);
+        } catch (Exception ex) {
+            Logger.getLogger(ListaComprasTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -126,7 +140,11 @@ public class ListaComprasTest {
         System.out.println("adicionaItem");
         ItemLista item = null;
         ListaCompras instance = new ListaCompras();
-        instance.adicionaItem(item);
+        try {
+            instance.adicionaItem(item);
+        } catch (Exception ex) {
+            Logger.getLogger(ListaComprasTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -154,7 +172,11 @@ public class ListaComprasTest {
         System.out.println("removeItem");
         ItemLista item = null;
         ListaCompras instance = new ListaCompras();
-        instance.removeItem(item);
+        try {
+            instance.removeItem(item);
+        } catch (Exception ex) {
+            Logger.getLogger(ListaComprasTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
