@@ -6,13 +6,19 @@
 package gui;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import dominio.*;
+import dominio.produto.Produto;
+import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // Necessários para trabalhar as mensagens que aparecem na tela.
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -58,7 +64,7 @@ public class CriaLista extends javax.swing.JFrame {
         quantidadeItem = new javax.swing.JFormattedTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        valorTotalLista = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -126,7 +132,7 @@ public class CriaLista extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Object.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -159,9 +165,9 @@ public class CriaLista extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -203,23 +209,21 @@ public class CriaLista extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(valorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5)
-                            .addGap(48, 48, 48)
-                            .addComponent(quantidadeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(158, 158, 158)
-                            .addComponent(jLabel6)))
+                        .addComponent(valorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4)
                     .addComponent(jLabel3)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(239, 239, 239)
-                        .addComponent(addItem)))
+                        .addComponent(addItem))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(48, 48, 48)
+                                .addComponent(quantidadeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6)
+                            .addComponent(nomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -248,9 +252,9 @@ public class CriaLista extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jLabel7.setText("Total:");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("0,00");
+        valorTotalLista.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        valorTotalLista.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        valorTotalLista.setText("0,00");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -260,7 +264,7 @@ public class CriaLista extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(valorTotalLista, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -269,7 +273,7 @@ public class CriaLista extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel8))
+                    .addComponent(valorTotalLista))
                 .addGap(20, 20, 20))
         );
 
@@ -280,9 +284,7 @@ public class CriaLista extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(removeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(removeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -333,6 +335,18 @@ public class CriaLista extends javax.swing.JFrame {
 
     private void removeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemActionPerformed
         // TODO add your handling code here:
+        
+        DefaultTableModel defTable = (DefaultTableModel) lista.getModel();
+        
+        if(lista.getSelectedRow() >= 0){
+            defTable.removeRow(lista.getSelectedRow());
+            lista.setModel(defTable);
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione uma linha para excluir", "Seleciona uma linha", ERROR_MESSAGE);
+        }
+        
+        
+        
     }//GEN-LAST:event_removeItemActionPerformed
 
     private void addItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemActionPerformed
@@ -340,20 +354,36 @@ public class CriaLista extends javax.swing.JFrame {
         if(!nomeProduto.getText().isEmpty() && !quantidadeItem.getText().isEmpty() && !valorProduto.getText().isEmpty()){      
             DefaultTableModel defTable = (DefaultTableModel) lista.getModel();
             
-            String nomeProd = nomeProduto.getText();
-            
+            nomeProduto.getText();
             int quantItem = Integer.parseInt(quantidadeItem.getText());
-            
             double valProd = Double.parseDouble(valorProduto.getText().replace(",", "."));
-            
             double valorTotal = valProd * quantItem;
             
-            defTable.addRow(new Object[]{nomeProd, Integer.toString(quantItem), Double.toString(valProd), Double.toString(valorTotal)});
+            defTable.addRow(new Object[]{nomeProduto.getText(),
+                                         quantItem,
+                                         valProd,
+                                         valorTotal});
+            
+            double valorTotLista = 0.0;
+            
+            for(int i = 0; i < defTable.getRowCount(); i++){
+                
+                valorTotLista += (Double) defTable.getValueAt(i, 3);
+            
+            }
+            
+            String pattern = "R$ ###,###.##";
+            DecimalFormat decimalFormat = new DecimalFormat(pattern);
 
+            String format = decimalFormat.format(valorTotLista);
+            
+            valorTotalLista.setText(format);
+           
             nomeProduto.setText(null);
             nomeProduto.grabFocus();
             valorProduto.setText(null);
-            quantidadeItem.setText(null); 
+            quantidadeItem.setText(null);
+            removeItem.setEnabled(true);
             
         } else {
             JOptionPane.showMessageDialog(null, "Existem campo em branco, verifique e tente novamente", "Campos em branco", ERROR_MESSAGE);
@@ -413,7 +443,6 @@ public class CriaLista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -426,5 +455,6 @@ public class CriaLista extends javax.swing.JFrame {
     private javax.swing.JButton removeItem;
     private javax.swing.JTextField supermercado;
     private javax.swing.JFormattedTextField valorProduto;
+    private javax.swing.JLabel valorTotalLista;
     // End of variables declaration//GEN-END:variables
 }
