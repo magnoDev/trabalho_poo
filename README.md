@@ -7,4 +7,4 @@ Repositório para o trabalho da matéria de Programação Orientada a Objetos do
 
 [**Mockup**](https://github.com/magnoDev/trabalho_poo/blob/master/ListaCompras/Mockup/Mockup_Analise.pdf)
 
-[**Diagrma de classes**](https://drive.google.com/file/d/1K0ossoVVPP42yz_0QchKsb4aNB8DtbXb/view?usp=sharing)
+[**Diagrma de classes**](https://drive.google.com/open?id=1_GpSeZ2Aul93h1srZLrUdOuSEsvZDBxq)
