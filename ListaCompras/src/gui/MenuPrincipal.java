@@ -225,7 +225,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void criaListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criaListaActionPerformed
         // TODO add your handling code here:
-        new CriaLista().setVisible(true);
+        CriaLista criaLista = new CriaLista();
+        criaLista.setVisible(true);
+        criaLista.recuperaUsuario(user);
+        
     }//GEN-LAST:event_criaListaActionPerformed
 
     /**

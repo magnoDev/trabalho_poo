@@ -60,12 +60,13 @@ public class InsereBD {
     }
     
     public void inserirProduto(Produto produto){
-        String sql = "INSERT INTO produto(nome, valo) "
+        String sql = "INSERT INTO produto(nome, valor) "
                 + "VALUES (?, ?)";
         try{
             PreparedStatement ps = getCon().prepareStatement(sql);
             ps.setString(1, produto.getNome());
-            ps.setDouble(2, produto.getValor());           
+            ps.setDouble(2, produto.getValor());
+            ps.executeUpdate();
         }
         catch(SQLException e){
             System.out.println(e.getMessage());
