@@ -5,10 +5,21 @@
  */
 package gui;
 
+import dao.ConectarBD;
+import dao.ConsultaBD;
+import dao.DeleteBD;
 import dominio.Cliente;
+import dominio.ListaCompras;
+import java.sql.Connection;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,12 +30,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     private Cliente user;
     
+    public MenuPrincipal() {
+        initComponents();
+    }
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public MenuPrincipal(Cliente user) {
         initComponents();
+        this.recuperaUsuario(user);
         criaLista.grabFocus();
+        this.carregaListasCompras();
     }
 
     /**
@@ -38,7 +54,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        listasCompra = new javax.swing.JTable();
         apagarlista = new javax.swing.JButton();
         abrirlistabotao = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -56,8 +72,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Listas existentes"));
         jPanel1.setMaximumSize(new java.awt.Dimension(600, 300));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        listasCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+
             },
             new String [] {
                 "Nome", "Data", "Supermercado"
@@ -78,11 +95,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(listasCompra);
+        if (listasCompra.getColumnModel().getColumnCount() > 0) {
+            listasCompra.getColumnModel().getColumn(0).setResizable(false);
+            listasCompra.getColumnModel().getColumn(1).setResizable(false);
+            listasCompra.getColumnModel().getColumn(2).setResizable(false);
         }
 
         apagarlista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/Recyclebin-icon2.png"))); // NOI18N
@@ -220,7 +237,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void apagarlistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarlistaActionPerformed
-        // TODO add your handling code here:
+        try {
+            Connection conn = null;
+            conn = ConectarBD.abrirConexao();
+            DeleteBD deleteBd = new DeleteBD(conn);
+
+            ListaCompras lista = new ListaCompras();
+            int linha = listasCompra.getSelectedRow();
+            
+            // setando a lista a ser removida
+            lista.setNomeLista(listasCompra.getValueAt(linha, 0).toString());
+            lista.setData(Timestamp.valueOf(listasCompra.getValueAt(linha, 1).toString()));
+            lista.setSupermercado(listasCompra.getValueAt(linha, 2).toString());
+
+            // deletando a lista do banco
+            deleteBd.deletaLista(lista);
+            
+            ConectarBD.fecharConexao(conn);
+            
+            // removendo a lista da view
+            this.removeLista();
+        } catch (Exception ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_apagarlistaActionPerformed
 
     private void criaListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criaListaActionPerformed
@@ -228,6 +267,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         CriaLista criaLista = new CriaLista();
         criaLista.setVisible(true);
         criaLista.recuperaUsuario(user);
+        criaLista.recuperaMenuPrincipal(this);
         
     }//GEN-LAST:event_criaListaActionPerformed
 
@@ -275,7 +315,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable listasCompra;
     private javax.swing.JButton logout;
     private javax.swing.JLabel nomeUser;
     // End of variables declaration//GEN-END:variables
@@ -285,5 +325,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
         nomeUser.setText(user.getNome());                
     }
 
+    public void addLista(ListaCompras lista){
+        DefaultTableModel defTable = (DefaultTableModel) this.listasCompra.getModel();
+        defTable.addRow(new Object[]{
+                                lista.getNomeLista(),
+                                lista.getData(),
+                                lista.getSupermercado() });
+    }
+    
+    public void removeLista(){
+        DefaultTableModel defTable = (DefaultTableModel) this.listasCompra.getModel();
+        defTable.removeRow(this.listasCompra.getSelectedRow());
+        this.listasCompra.setModel(defTable);
+    }
+    
+    private void carregaListasCompras(){
+        Connection conn = null;
+        conn = ConectarBD.abrirConexao();
+        ConsultaBD consultaBD = new ConsultaBD(conn);
+        List<ListaCompras> listasCompras = consultaBD.retornaListasByCliente(this.user);
+                
+        for(int index = 0; index < listasCompras.size(); index++){
+            ListaCompras lista = listasCompras.get(index);
+            this.addLista(lista);
+        }
+    }
 
 }

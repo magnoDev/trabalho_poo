@@ -93,7 +93,7 @@ public class InsereBD {
                 ps.setInt(1, lista.getItens().get(i).getQuantidade());
                 ps.setDouble(2, lista.getItens().get(i).getValor());
                 ps.setString(3, lista.getSupermercado());
-                ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+                ps.setTimestamp(4, lista.getData());
                 ps.setInt(5, idCliente.retornaIdUsuario(user));
                 ps.setInt(6, idProduto.retornaIdProduto(lista.getItens().get(i).getProduto()));
                 ps.setString(7, lista.getNomeLista());
@@ -101,6 +101,7 @@ public class InsereBD {
                     boo = true;
                 }
             }
+            ConectarBD.fecharConexao(con);
         }
         catch(SQLException e){
             System.out.println(e.getMessage());

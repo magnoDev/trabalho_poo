@@ -7,6 +7,10 @@ package dao;
 import dominio.*;
 import dominio.produto.Produto;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -178,5 +182,44 @@ public class ConsultaBD {
         
         return boo;
     }
-    
+    public List<ListaCompras> retornaListasByCliente(Cliente cliente){
+        Connection con = null;        
+        con = ConectarBD.abrirConexao();
+        List<ListaCompras> listasCompras = new ArrayList<>();
+        
+        String sql = "SELECT DISTINCT nome, datacompra, supermercado "
+                + " FROM itemlista "
+                + " WHERE clienteid = ? ";
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, this.retornaIdUsuario(cliente));
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                ListaCompras lista = new ListaCompras();
+                try {
+                    lista.setCliente(cliente);
+                    lista.setNomeLista(rs.getString(1));
+                    lista.setData(rs.getTimestamp(2));
+                    lista.setSupermercado(rs.getString(3));
+                    listasCompras.add(lista);
+                } catch (Exception ex) {
+                    Logger.getLogger(ConsultaBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+            rs.close();
+            ConectarBD.fecharConexao(con);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return listasCompras;
+        
+    }
 }

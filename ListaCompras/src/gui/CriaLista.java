@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import dominio.*;
 import dominio.produto.Produto;
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ import static javax.swing.JOptionPane.YES_NO_OPTION;
 public class CriaLista extends javax.swing.JFrame {
 
     private Cliente user;
+    private MenuPrincipal menuPrincipal;
     /**
      * Creates new form CriaLista
      */
@@ -298,11 +300,11 @@ public class CriaLista extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(criarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(removeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(removeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
@@ -365,16 +367,18 @@ public class CriaLista extends javax.swing.JFrame {
                         item.setQuantidade((Integer)defTable.getValueAt(i, 1));
                         item.setValor((Double) defTable.getValueAt(i, 3));
                         listaCompras.adicionaItem(item);
-
+                        listaCompras.setData(new Timestamp(System.currentTimeMillis()));
                 }
                 
                 insereLista.inserirLista(listaCompras, user);
             
+                ConectarBD.fecharConexao(con);
             } catch (Exception ex) {
                 Logger.getLogger(CriaLista.class.getName()).log(Level.SEVERE, null, ex);
             }            
             
-            
+            // adicionando lista no menu principal
+            menuPrincipal.addLista(listaCompras);
             
             JOptionPane.showMessageDialog(null, "Lista criada com sucesso!", "Sucesso", PLAIN_MESSAGE);
             dispose();
@@ -460,7 +464,7 @@ public class CriaLista extends javax.swing.JFrame {
             nomeProduto.grabFocus();
             valorProduto.setText(null);
             quantidadeItem.setText(null);           
-        }        
+        }
     }//GEN-LAST:event_addItemActionPerformed
 
     private void quantidadeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantidadeItemActionPerformed
@@ -529,5 +533,8 @@ public class CriaLista extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     public void recuperaUsuario(Cliente usuario){
         this.user = usuario;                
+    }
+    public void recuperaMenuPrincipal(MenuPrincipal menuPrincipal){
+        this.menuPrincipal = menuPrincipal;
     }
 }

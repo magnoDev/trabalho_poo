@@ -219,9 +219,8 @@ public class Login extends javax.swing.JFrame {
             if(verificaUsuario.verificaUsuarioSenha(user)){
                 try {
                     user.setNome(verificaUsuario.retornaNomeUsuario(user));                    
-                    MenuPrincipal main = new MenuPrincipal();
+                    MenuPrincipal main = new MenuPrincipal(user);
                     main.setVisible(true);
-                    main.recuperaUsuario(user);
                 } catch (Exception ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -252,6 +251,7 @@ public class Login extends javax.swing.JFrame {
                 }
             }
             user = null;
+            ConectarBD.fecharConexao(con);
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,6 +328,7 @@ public class Login extends javax.swing.JFrame {
                            "Erro",ERROR_MESSAGE);
                 criaNomeCampoLogin.grabFocus();
             }
+            ConectarBD.fecharConexao(con);
         } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }

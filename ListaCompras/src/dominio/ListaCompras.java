@@ -6,6 +6,7 @@
 package dominio;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,20 @@ public class ListaCompras implements Serializable {
     private Cliente cliente;
     private String supermercado;
     private final List<ItemLista> itens = new ArrayList<>();
+    private Timestamp data;
+    private double valorTotal = 0.0;
+    
+    public ListaCompras(){
+     this.valorTotal = 0.0;
+    }
+
+    public Timestamp getData() {
+        return data;
+    }
+
+    public void setData(Timestamp data) {
+        this.data = data;
+    }
 
     public List<ItemLista> getItens() {
         return itens;
@@ -30,11 +45,6 @@ public class ListaCompras implements Serializable {
 
     public void setSupermercado(String supermercado) {
         this.supermercado = supermercado;
-    }
-    private double valorTotal = 0.0;
-    
-    public ListaCompras(){
-     this.valorTotal = 0.0;
     }
     
     public String getNomeLista() {
