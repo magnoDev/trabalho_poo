@@ -35,7 +35,7 @@ public class ClienteTest {
     public void tearDown() {
     }
 
-     * Test of getNome method, of class Cliente.
+     /* Test of getNome method, of class Cliente.
      */
     @Test
     public void testGetNome() {

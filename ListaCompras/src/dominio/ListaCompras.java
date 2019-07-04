@@ -65,7 +65,7 @@ public class ListaCompras implements Serializable {
         
         try{
             this.itens.add(item);
-            this.setValorTotal((this.valorTotal + ( item.getQuantidade() * item.getValor() )));
+            this.setValorTotal((this.valorTotal + ( item.getValor() )));
         }
         catch(Exception ex){
             throw ex;
@@ -93,7 +93,7 @@ public class ListaCompras implements Serializable {
         
         try{
             this.itens.remove(getIndexItemLista(item));
-            setValorTotal((getValorTotal()-(item.getQuantidade() * item.getValor() )));
+            setValorTotal((getValorTotal()-( item.getValor() )));
 
         }
         catch(Exception ex){

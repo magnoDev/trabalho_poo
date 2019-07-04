@@ -21,14 +21,8 @@ public class ItemLista implements Serializable {
     public double getValor() {
         return valor;
     }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
     
-    public ItemLista(){
-    
-        
+    public ItemLista(){        
     }
 
     public ItemLista(Produto produto, int quantidade, double valor) {
@@ -37,17 +31,8 @@ public class ItemLista implements Serializable {
         this.valor = valor;
     }
 
-    public double getValor() {
-        return valor;
-    }
-
     public void setValor(double preco) throws Exception {
-        
-        if (preco==0.0){
-            throw new Exception("Preço não pode ser vazio");
-        }else{
-            this.valor = preco;
-        }
+            this.valor = this.produto.getValor() * this.quantidade;
     }
 
     public Produto getProduto() {
