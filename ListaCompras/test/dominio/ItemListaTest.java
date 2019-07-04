@@ -50,8 +50,8 @@ public class ItemListaTest {
         ItemLista instance = new ItemLista();
         double expResult = 5.0;
         try {
-            instance.setPreco(expResult);
-            double result = instance.getPreco();
+            instance.setValor(expResult);
+            double result = instance.getValor();
             assertEquals(expResult, result, 0.0);
         } catch (Exception ex) {
             Logger.getLogger(ItemListaTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,10 +67,10 @@ public class ItemListaTest {
         double preco = 1.0;
         ItemLista instance = new ItemLista();
         try{
-            instance.setPreco(preco);
-            assertEquals(preco, instance.getPreco(), 0.0);
+            instance.setValor(preco);
+            assertEquals(preco, instance.getValor(), 0.0);
             // deve disparar excessão na linha abaixo
-            instance.setPreco(0.0);
+            instance.setValor(0.0);
             // caso não dispare, falha o teste
             fail("Valores menores ou iguais a zero não devem ser aceitos");
         }catch(Exception ex){

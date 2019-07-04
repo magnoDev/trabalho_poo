@@ -16,29 +16,29 @@ import java.io.Serializable;
 public class ItemLista implements Serializable {
     private Produto produto;
     private int quantidade;
-    private double preco;
+    private double valor;
     
     public ItemLista(){
     
         
     }
 
-    public ItemLista(Produto produto, int quantidade, double preco) {
+    public ItemLista(Produto produto, int quantidade, double valor) {
         this.produto = produto;
         this.quantidade = quantidade;
-        this.preco = preco;
+        this.valor = valor;
     }
 
-    public double getPreco() {
-        return preco;
+    public double getValor() {
+        return valor;
     }
 
-    public void setPreco(double preco) throws Exception {
+    public void setValor(double preco) throws Exception {
         
         if (preco==0.0){
             throw new Exception("Preço não pode ser vazio");
         }else{
-            this.preco = preco;
+            this.valor = preco;
         }
     }
 

@@ -20,10 +20,10 @@ public class ListaCompras implements Serializable {
     private String nomeLista;
     private Cliente cliente;
     private final List<ItemLista> itens = new ArrayList<>();
-    private double valorTotal = 0.0;
+    private double valorTotal;
     
     public ListaCompras(){
-    
+     this.valorTotal = 0.0;
     }
     
     public String getNomeLista() {
@@ -57,38 +57,35 @@ public class ListaCompras implements Serializable {
         return valorTotal;
     }
 
-    public void setValorTotal(double valorTotal) throws Exception {
-        
-        if (valorTotal==0.0){
-            throw new Exception("Valor total não pode ser zero");
-        }else{
-            this.valorTotal = valorTotal;
-        }
+    private void setValorTotal(double valorTotal){
+        this.valorTotal = valorTotal;
     }
         
     public void adicionaItem(ItemLista item) throws Exception{
         
         try{
             this.itens.add(item);
-            setValorTotal((getValorTotal()+(item.getQuantidade() * item.getProduto().getValor())));
+            this.setValorTotal((this.valorTotal + ( item.getQuantidade() * item.getValor() )));
         }
         catch(Exception ex){
             throw ex;
         }
     }
     
-    public int getIndexItemLista(ItemLista item){
+    public int getIndexItemLista(ItemLista item) throws Exception{
         
         int indexItemLista = 0;
         String nomeItem = item.getProduto().getNome();
-        String nomeItemNaLista = this.itens.get(indexItemLista).getProduto().getNome();
+        String nomeItemNaLista;
         
-        while(!nomeItem.equals(nomeItemNaLista) || indexItemLista < this.itens.size()){
-            indexItemLista++;
+        for(indexItemLista = 0; indexItemLista < this.itens.size(); indexItemLista++){
             nomeItemNaLista = this.itens.get(indexItemLista).getProduto().getNome();
+            if(nomeItem.equals(nomeItemNaLista)){
+                return indexItemLista;
+            }
         }
         
-        return indexItemLista;
+        throw new Exception("Item não encontrado");
         
     }
     
@@ -96,25 +93,11 @@ public class ListaCompras implements Serializable {
         
         try{
             this.itens.remove(getIndexItemLista(item));
-            setValorTotal((getValorTotal()-(item.getQuantidade() * item.getProduto().getValor())));
+            setValorTotal((getValorTotal()-(item.getQuantidade() * item.getValor() )));
 
         }
         catch(Exception ex){
             throw ex;
         }
-    }
-        
-    
-    public void imprimeLista(){
-    
-        Iterator lista = this.itens.iterator();
-        
-        while(lista.hasNext()){
-            System.out.println(lista.next());
-        }
-        
-        System.out.println(this.valorTotal);
-        
-    }
-    
+    }    
 }
