@@ -7,7 +7,6 @@ package dominio;
 
 import java.io.IOException;
 import java.io.Serializable;
-import persistencia.PersistenciaArquivo;
 
 
 /**
@@ -18,73 +17,57 @@ public class Cliente implements Serializable {
     String nome;
     String email;
     String login;
-    String dataNascimento;
-    Localizacao localizacao;
-    String senha;
+    int senha;
 
-    public Cliente(String nome, String email, String dataNascimento, Localizacao localizacao, String senha) {
-        this.nome = nome;
-        this.email = email;
-        this.login = email;
-        this.dataNascimento = dataNascimento;
-        this.localizacao = localizacao;
-        this.senha = senha;
+    public Cliente(String nome, String email, int senha) throws Exception {
+        this.setNome(nome);
+        this.setEmail(email);
+        this.setSenha(senha);
     } 
-    
-    public void salvar(Cliente cliente) throws IOException{
-        PersistenciaArquivo persistencia = new PersistenciaArquivo();
-        persistencia.salvar(cliente);
-    }
 
+
+    public Cliente() {}
+    
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String nome) throws Exception {
+        if (nome.equals("")){
+            throw new Exception("Nome não pode ser vazio");
+        }else{
+            this.nome = nome;
+        }
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-        this.login = email;
+    public void setEmail(String email) throws Exception {
+        if (email.equals("")){
+            throw new Exception("Email não pode ser vazi0");
+        }else{        
+            this.email = email;
+            this.login = email;
+        }
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-        this.email = login;
-    }
-
-    public Localizacao getLocalizacao() {
-        return localizacao;
-    }
-
-    public void setLocalizacao(Localizacao localizacao) {
-        this.localizacao = localizacao;
-    }
-
-    public String getSenha() {
+    public int getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-    
-    
-    
-    
-    
+    public void setSenha(int senha) throws Exception {
+        if (senha == 0){
+            throw new Exception("Senha não pode ser vazia");
+        }else{
+            this.senha = senha;
+        }
+    }  
+       
 }
 
