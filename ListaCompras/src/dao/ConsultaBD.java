@@ -182,6 +182,7 @@ public class ConsultaBD {
         
         return boo;
     }
+    
     public List<ListaCompras> retornaListasByCliente(Cliente cliente){
         Connection con = null;        
         con = ConectarBD.abrirConexao();
@@ -221,5 +222,51 @@ public class ConsultaBD {
         
         return listasCompras;
         
+    }
+    
+    public List<ItemLista> retornaItensLista(ListaCompras lista){
+        Connection con = null;        
+        con = ConectarBD.abrirConexao();
+        List<ItemLista> itensLista = new ArrayList<>();
+        
+        String sql = "SELECT * FROM itemlista " +
+                    "JOIN produto ON itemlista.produtoid = produto.id " +
+                    "WHERE clienteid = ? AND datacompra::date = date(?) " +
+                    "AND supermercado = ? AND itemlista.nome = ?";
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setInt(1, this.retornaIdUsuario(lista.getCliente()));
+            ps.setString(2, lista.getData().toString());
+            ps.setString(3, lista.getSupermercado());
+            ps.setString(4, lista.getNomeLista());
+
+            ResultSet rs = ps.executeQuery();
+            System.out.println("TESTEE");
+                    
+            while(rs.next()){
+                try {
+                    Produto produto = new Produto();
+                    produto.setNome(rs.getString(11));
+                    produto.setValor(rs.getDouble(12));
+                    ItemLista item = new ItemLista(produto, rs.getInt(2), rs.getDouble(12));
+                
+                    itensLista.add(item);
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(ConsultaBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+            rs.close();
+            ConectarBD.fecharConexao(con);
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return itensLista;
     }
 }

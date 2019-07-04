@@ -12,11 +12,13 @@ import dominio.Cliente;
 import dominio.ListaCompras;
 import java.sql.Connection;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 import javax.swing.table.DefaultTableModel;
@@ -112,6 +114,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         abrirlistabotao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/icons/zoom-search-2-icon.png"))); // NOI18N
         abrirlistabotao.setText("Abrir lista");
+        abrirlistabotao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirlistabotaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -270,6 +277,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
         criaLista.recuperaMenuPrincipal(this);
         
     }//GEN-LAST:event_criaListaActionPerformed
+
+    private void abrirlistabotaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirlistabotaoActionPerformed
+        if(listasCompra.getSelectedRow() >= 0){
+            
+            try {
+                // recuperando a lista de compras selecionada
+                int linha = listasCompra.getSelectedRow();
+                ListaCompras lista = new ListaCompras();
+                lista.setCliente(user);
+                lista.setNomeLista(listasCompra.getValueAt(linha, 0).toString());
+                lista.setData(Timestamp.valueOf( listasCompra.getValueAt(linha, 1).toString() ));
+                lista.setSupermercado(listasCompra.getValueAt(linha, 2).toString());
+                
+                // enviando a lista para tela de detalhes
+                DetalhesLista detalhesLista = new DetalhesLista(lista);
+                detalhesLista.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecione uma linha para vizualizar", "Seleciona uma linha", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_abrirlistabotaoActionPerformed
 
     /**
      * @param args the command line arguments
