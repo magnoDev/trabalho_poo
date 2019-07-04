@@ -25,7 +25,7 @@ public class ProdutoBaseTest {
     String nome = "nome";
     String categoria = "categoria";
     String tipo = "tipo";
-    String peso = "1.2";
+    Double peso = 1.2;
     String marca = "marca";
     
     public ProdutoBaseTest() {
@@ -133,17 +133,24 @@ public class ProdutoBaseTest {
     @Test
     public void testSetCategoria(){
         try {
-            System.out.println("setNome");
+            System.out.println("testSetCategoria");
+            
+            // testando uma categoria valida
             String categoria = "testCategoria";
             ProdutoBase instance = this.deafultBaseProduct();
+            // não deve disparar exceção
             instance.setCategoria(categoria);
             String expResult = categoria;
-            String result = instance.getNome();
+            String result = instance.getCategoria();
+            // comparando se a categoria setada foi realmente salva
             assertEquals(expResult, result);
             
-            nome = "";
-            instance.setNome(nome);
-            fail("Método não deve permitir que o nome seja vazio");
+            // testando uma categoria invalida
+            categoria = "";
+            // deve disparar exceção
+            instance.setCategoria(categoria);
+            // se não disparar eu falho o teste
+            fail("Método não deve permitir que a categoria seja vazia");
         } catch (Exception ex) {
             Logger.getLogger(ProdutoBaseTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -167,11 +174,26 @@ public class ProdutoBaseTest {
     @Test
     public void testSetTipo() throws Exception {
         System.out.println("setTipo");
-        String tipo = "";
-        ProdutoBase instance = null;
-        instance.setTipo(tipo);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {            
+            // testando um tipo valido
+            String tipo = "tipo";
+            ProdutoBase instance = this.deafultBaseProduct();
+            // não deve disparar exceção
+            instance.setTipo(tipo);
+            String expResult = tipo;
+            String result = instance.getTipo();
+            // comparando se o tipo foi realmente salvo
+            assertEquals(expResult, result);
+            
+            // testando um tipo invalido
+            tipo = "";
+            // deve disparar exceção
+            instance.setTipo(tipo);
+            // se não disparar eu falho o teste
+            fail("Método não deve permitir que o tipo seja vazio");
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutoBaseTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -180,12 +202,10 @@ public class ProdutoBaseTest {
     @Test
     public void testGetPeso() {
         System.out.println("getPeso");
-        ProdutoBase instance = null;
-        double expResult = 0.0;
+        ProdutoBase instance = this.deafultBaseProduct();
+        double expResult = this.peso;
         double result = instance.getPeso();
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -194,11 +214,26 @@ public class ProdutoBaseTest {
     @Test
     public void testSetPeso() throws Exception {
         System.out.println("setPeso");
-        double peso = 0.0;
-        ProdutoBase instance = null;
-        instance.setPeso(peso);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {            
+            // testando um peso valido
+            Double peso = 1.0;
+            ProdutoBase instance = this.deafultBaseProduct();
+            // não deve disparar exceção
+            instance.setPeso(peso);
+            Double expResult = peso;
+            Double result = instance.getPeso();
+            // comparando se o peso foi realmente salvo
+            assertEquals(expResult, result);
+            
+            // testando um peso invalido
+            peso = 0.0;
+            // deve disparar exceção
+            instance.setPeso(peso);
+            // se não disparar eu falho o teste
+            fail("Método não deve permitir que o peso seja igual a zero");
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutoBaseTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -206,13 +241,11 @@ public class ProdutoBaseTest {
      */
     @Test
     public void testGetMarca() {
-        System.out.println("getMarca");
-        ProdutoBase instance = null;
-        String expResult = "";
+        System.out.println("############### getMarca ###################3");
+        ProdutoBase instance = this.deafultBaseProduct();
+        String expResult = this.marca;
         String result = instance.getMarca();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -221,11 +254,26 @@ public class ProdutoBaseTest {
     @Test
     public void testSetMarca() throws Exception {
         System.out.println("setMarca");
-        String marca = "";
-        ProdutoBase instance = null;
-        instance.setMarca(marca);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {            
+            // testando uma marca valida
+            String marca = "marca";
+            ProdutoBase instance = this.deafultBaseProduct();
+            // não deve disparar exceção
+            instance.setMarca(marca);
+            String expResult = marca;
+            String result = instance.getMarca();
+            // comparando se a marca foi realmente salva
+            assertEquals(expResult, result);
+            
+            // testando uma marca invalida
+            marca = "";
+            // deve disparar exceção
+            instance.setMarca(marca);
+            // se não disparar eu falho o teste
+            fail("Método não deve permitir que a marca seja vazia");
+        } catch (Exception ex) {
+            Logger.getLogger(ProdutoBaseTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

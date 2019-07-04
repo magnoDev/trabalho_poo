@@ -19,7 +19,6 @@ import static javax.swing.JOptionPane.PLAIN_MESSAGE;
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 
-
 /**
  *
  * @author magno
@@ -397,7 +396,7 @@ public class CriaLista extends javax.swing.JFrame {
     private void quantidadeItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantidadeItemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_quantidadeItemActionPerformed
-
+  
     /**
      * @param args the command line arguments
      */

@@ -14,10 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author magno
- */
 public class ClienteTest {
     
     public ClienteTest() {
@@ -39,30 +35,23 @@ public class ClienteTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of salvar method, of class Cliente.
-     */
-    @Test
-    public void testSalvar() throws Exception {
-        System.out.println("salvar");
-        Cliente cliente = null;
-        Cliente instance = null;
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getNome method, of class Cliente.
      */
     @Test
     public void testGetNome() {
         System.out.println("getNome");
-        Cliente instance = null;
-        String expResult = "";
-        String result = instance.getNome();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String nome = "David";
+        Cliente instance = new Cliente();
+        try {
+            // Setando um nome valido
+            instance.setNome(nome);
+            assertEquals(nome, instance.getNome());
+            // Setando um nome inválido
+            instance.setNome("");
+            fail("nome vazio.. NÃO PODE!!!");
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -71,11 +60,19 @@ public class ClienteTest {
     @Test
     public void testSetNome() throws Exception {
         System.out.println("setNome");
-        String nome = "";
-        Cliente instance = null;
-        instance.setNome(nome);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try{
+            String nome = "David";
+            Cliente instance = new Cliente();
+            instance.setNome(nome);
+            assertEquals(nome, instance.getNome());
+            
+// Setando um nome inválido
+            instance.setNome("");
+            fail("nome vazio.. NÃO PODE!!!");
+            
+        }catch(Exception ex){
+            Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -84,12 +81,18 @@ public class ClienteTest {
     @Test
     public void testGetEmail() {
         System.out.println("getEmail");
-        Cliente instance = null;
-        String expResult = "";
-        String result = instance.getEmail();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String email = "david@email.com";
+        Cliente instance = new Cliente();
+        try {
+            // Setando um email valido
+            instance.setEmail(email);
+            assertEquals(email, instance.getEmail());
+            // Setando um email inválido
+            instance.setEmail("");
+            fail("email vazio.. NÃO PODE!!!");
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -98,11 +101,18 @@ public class ClienteTest {
     @Test
     public void testSetEmail() throws Exception {
         System.out.println("setEmail");
-        String email = "";
-        Cliente instance = null;
-        instance.setEmail(email);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String email = "david@email.com";
+        Cliente instance = new Cliente();
+        try {
+            // Setando um email valido
+            instance.setEmail(email);
+            assertEquals(email, instance.getEmail());
+            // Setando um email inválido
+            instance.setEmail("");
+            fail("email vazio.. NÃO PODE!!!");
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -111,12 +121,16 @@ public class ClienteTest {
     @Test
     public void testGetLogin() {
         System.out.println("getLogin");
-        Cliente instance = null;
-        String expResult = "";
-        String result = instance.getLogin();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String login = "david";
+        Cliente instance = new Cliente();
+        try {
+            instance.setLogin(login);
+            assertEquals(login, instance.getLogin());
+            instance.setLogin("");
+            fail("Login vazio... NÃO PODE!!!");
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -125,12 +139,18 @@ public class ClienteTest {
     @Test
     public void testGetSenha() {
         System.out.println("getSenha");
-        Cliente instance = null;
-        String expResult = "";
-        int result = instance.getSenha();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int senha = 123456;
+        Cliente instance = new Cliente();
+        try {
+            // Setando um email valido
+            instance.setSenha(senha);
+            assertEquals(senha, instance.getSenha());
+            // Setando um email inválido
+            instance.setSenha(0);
+            fail("Senha vazia?!? NÃO PODE!!!");
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
