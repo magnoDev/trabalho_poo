@@ -6,6 +6,9 @@
 package dominio;
 
 import dominio.produto.Produto;
+import dominio.produto.ProdutoBaseTest;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -58,11 +61,19 @@ public class ItemListaTest {
     @Test
     public void testSetPreco() {
         System.out.println("setPreco");
-        double preco = 0.0;
+        double preco = 1.0;
         ItemLista instance = new ItemLista();
-        instance.setPreco(preco);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try{
+            instance.setPreco(preco);
+            assertEquals(preco, instance.getPreco(), 0.0);
+            // deve disparar excessão na linha abaixo
+            instance.setPreco(0.0);
+            // caso não dispare, falha o teste
+            fail("Valores menores ou iguais a zero não devem ser aceitos");
+        }catch(Exception ex){
+            System.out.println("Disparei excessao");
+            Logger.getLogger(ProdutoBaseTest.class.getName()).log(Level.SEVERE, null, ex);       
+        }
     }
 
     /**
