@@ -5,10 +5,14 @@
  */
 package gui;
 
+import dao.ConectarBD;
+import dao.ConsultaBD;
+import dao.InsereBD;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import dominio.*;
 import dominio.produto.Produto;
+import java.sql.Connection;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +29,7 @@ import static javax.swing.JOptionPane.YES_NO_OPTION;
  */
 public class CriaLista extends javax.swing.JFrame {
 
+    private Cliente user;
     /**
      * Creates new form CriaLista
      */
@@ -325,6 +330,14 @@ public class CriaLista extends javax.swing.JFrame {
     private void criarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarListaActionPerformed
         // TODO add your handling code here:
         if(!nomeLista.getText().isEmpty() && !supermercado.getText().isEmpty() && lista.getRowCount() > 0){
+
+            
+            Connection con = null;        
+            con = ConectarBD.abrirConexao();        
+            InsereBD insereProduto = new InsereBD(con);
+            InsereBD insereLista = new InsereBD(con);
+
+
             DefaultTableModel defTable = (DefaultTableModel) lista.getModel();
             
             ListaCompras listaCompras = new ListaCompras();
@@ -335,21 +348,27 @@ public class CriaLista extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(CriaLista.class.getName()).log(Level.SEVERE, null, ex);
             }
-                        
-            for(int i = 0; i < defTable.getRowCount(); i++){
-                try {
-                    Produto produto = new Produto();
-                    ItemLista item = new ItemLista();
-                    produto.setNome((String) defTable.getValueAt(i, 0));
-                    produto.setValor((Double) defTable.getValueAt(i, 2));
-                    item.setProduto(produto);
-                    item.setQuantidade((Integer)defTable.getValueAt(i, 1));
-                    item.setValor((Double) defTable.getValueAt(i, 3));
-                    listaCompras.adicionaItem(item);
-                } catch (Exception ex) {
-                    Logger.getLogger(CriaLista.class.getName()).log(Level.SEVERE, null, ex);
+            
+            try {
+                for(int i = 0; i < defTable.getRowCount(); i++){
+
+                        Produto produto = new Produto();
+                        ItemLista item = new ItemLista();
+                        produto.setNome((String) defTable.getValueAt(i, 0));
+                        produto.setValor((Double) defTable.getValueAt(i, 2));
+                        insereProduto.inserirProduto(produto);
+                        item.setProduto(produto);
+                        item.setQuantidade((Integer)defTable.getValueAt(i, 1));
+                        item.setValor((Double) defTable.getValueAt(i, 3));
+                        listaCompras.adicionaItem(item);
+
                 }
-            }
+                
+                insereLista.inserirLista(listaCompras, user);
+            
+            } catch (Exception ex) {
+                Logger.getLogger(CriaLista.class.getName()).log(Level.SEVERE, null, ex);
+            }            
             
             
             
@@ -484,4 +503,7 @@ public class CriaLista extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField valorProduto;
     private javax.swing.JLabel valorTotalLista;
     // End of variables declaration//GEN-END:variables
+    public void recuperaUsuario(Cliente usuario){
+        this.user = usuario;                
+    }
 }

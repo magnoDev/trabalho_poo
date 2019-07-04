@@ -5,6 +5,7 @@
  */
 package dao;
 import dominio.*;
+import dominio.produto.Produto;
 import java.sql.*;
 
 /**
@@ -87,6 +88,60 @@ public class ConsultaBD {
         }
         
         return nome;
+        
+    }
+    
+    public int retornaIdUsuario(Cliente usuario){
+        int id = 0;
+        
+        String sql = "SELECT id FROM cliente "
+                + "WHERE email = ?";
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, usuario.getEmail());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                id = (Integer) rs.getObject(1);
+            }
+            rs.close();
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return id;
+        
+    }
+
+    public int retornaIdProduto(Produto produto){
+        int id = 0;
+        
+        String sql = "SELECT id FROM produto "
+                + "WHERE nome = ?";
+        try{
+            PreparedStatement ps = getCon().prepareStatement(sql);
+            ps.setString(1, produto.getNome());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                id = (Integer) rs.getObject(1);
+            }
+            rs.close();
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return id;
         
     }
     
