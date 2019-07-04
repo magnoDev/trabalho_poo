@@ -5,10 +5,8 @@
  */
 package dominio;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -87,11 +85,10 @@ public class ListaCompras implements Serializable {
     
     public int getIndexItemLista(ItemLista item) throws Exception{
         
-        int indexItemLista = 0;
         String nomeItem = item.getProduto().getNome();
         String nomeItemNaLista;
         
-        for(indexItemLista = 0; indexItemLista < this.itens.size(); indexItemLista++){
+        for(int indexItemLista = 0; indexItemLista < this.itens.size(); indexItemLista++){
             nomeItemNaLista = this.itens.get(indexItemLista).getProduto().getNome();
             if(nomeItem.equals(nomeItemNaLista)){
                 return indexItemLista;

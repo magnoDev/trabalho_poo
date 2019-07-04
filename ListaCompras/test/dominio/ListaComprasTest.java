@@ -46,9 +46,9 @@ public class ListaComprasTest {
     @Test
     public void testGetNomeLista() {
         System.out.println("getNomeLista");
-        ListaCompras instance = new ListaCompras();
-        String expResult = "TestLista";
         try {
+            ListaCompras instance = new ListaCompras();
+            String expResult = "TestLista";
             instance.setNomeLista(expResult);
             String result = instance.getNomeLista();
             assertEquals(expResult, result);

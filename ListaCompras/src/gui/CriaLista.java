@@ -42,6 +42,7 @@ public class CriaLista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        doubleTotal = new javax.swing.JLabel();
         removeItem = new javax.swing.JButton();
         criarLista = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -64,6 +65,8 @@ public class CriaLista extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         valorTotalLista = new javax.swing.JLabel();
+
+        doubleTotal.setText("jLabel8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -282,19 +285,19 @@ public class CriaLista extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(removeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(criarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(criarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(removeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
@@ -307,15 +310,16 @@ public class CriaLista extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(removeItem)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(criarLista)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removeItem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(criarLista))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -356,7 +360,7 @@ public class CriaLista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Lista criada com sucesso!", "Sucesso", PLAIN_MESSAGE);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "Existem campo em branco, verifique e tente novamente", "Campos em branco", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Existe(m) campo(s) em branco ou inválidos, verifique e tente novamente", "Campos em branco", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_criarListaActionPerformed
 
@@ -366,10 +370,25 @@ public class CriaLista extends javax.swing.JFrame {
         DefaultTableModel defTable = (DefaultTableModel) lista.getModel();
         
         if(lista.getSelectedRow() >= 0){
+            // Atualizando valor total da lista
+            int linha = lista.getSelectedRow();
+            int colunaValorTotal = 3; 
+            double valorTotLista = Double.parseDouble(this.doubleTotal.getText());
+            String valorItem = this.lista.getValueAt(linha, colunaValorTotal).toString();
+            valorTotLista -= Double.parseDouble(valorItem);
+            // registrando novo valor na variavel global
+            this.doubleTotal.setText(Double.toString(valorTotLista));
+            String pattern = "R$ ###,###.##";
+            DecimalFormat decimalFormat = new DecimalFormat(pattern);
+            String totalFormatado = decimalFormat.format(valorTotLista);
+            valorTotalLista.setText(totalFormatado);
+            
+            // retirando item da lista
             defTable.removeRow(lista.getSelectedRow());
             lista.setModel(defTable);
+            
         }else{
-            JOptionPane.showMessageDialog(null, "Selecione uma linha para excluir", "Seleciona uma linha", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione uma linha para excluir", "Seleciona uma linha", ERROR_MESSAGE);
         }
         
         
@@ -399,6 +418,10 @@ public class CriaLista extends javax.swing.JFrame {
             
             }
             
+            // salvando o valor total em uma variável para facilitar a manipulação
+            String strTotal = Double.toString(valorTotLista);
+            this.doubleTotal.setText(strTotal);
+            
             String pattern = "R$ ###,###.##";
             DecimalFormat decimalFormat = new DecimalFormat(pattern);
 
@@ -413,7 +436,7 @@ public class CriaLista extends javax.swing.JFrame {
             removeItem.setEnabled(true);
             
         } else {
-            JOptionPane.showMessageDialog(null, "Existem campo em branco, verifique e tente novamente", "Campos em branco", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Existe(m) campo(s) em branco ou inválidos, verifique e tente novamente", "Campos em branco", ERROR_MESSAGE);
             nomeProduto.setText(null);
             nomeProduto.grabFocus();
             valorProduto.setText(null);
@@ -463,6 +486,7 @@ public class CriaLista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addItem;
     private javax.swing.JButton criarLista;
+    private javax.swing.JLabel doubleTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
