@@ -30,7 +30,7 @@ public class InsereBD {
         this.con = con;
     }
     
-        public boolean inserirUsuario(Cliente usuario){
+    public boolean inserirUsuario(Cliente usuario){
         boolean boo = false;
                         
         String sql = "INSERT INTO cliente(nome, email, senha) "
@@ -45,6 +45,33 @@ public class InsereBD {
                 boo = true;
             }
             
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        catch(NullPointerException e){
+            System.out.println(e.getMessage());
+        }
+                
+        return boo;
+    }
+
+    public boolean inserirLista(ListaCompras lista){
+        boolean boo = false;
+                        
+        String sql = "INSERT INTO itemlista\n" +
+                     "(quantidade, preco, supermercado, comprado, datacompra, clienteid, produtoid, nome)\n" +
+                     "VALUES(?, ?, ?, false, ?, ?, ?, ?);";
+        try{
+            for(int i = 0; i < 9; i++){
+                PreparedStatement ps = getCon().prepareStatement(sql);
+                //ps.setString(1, usuario.getNome());
+                //ps.setString(2, usuario.getEmail());
+                //ps.setInt(3, usuario.getSenha());
+                if(ps.executeUpdate() > 0){
+                    boo = true;
+                }
+            }
         }
         catch(SQLException e){
             System.out.println(e.getMessage());

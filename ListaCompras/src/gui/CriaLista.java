@@ -325,9 +325,35 @@ public class CriaLista extends javax.swing.JFrame {
 
     private void criarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarListaActionPerformed
         // TODO add your handling code here:
-        if(!nomeLista.getText().isEmpty() && !supermercado.getText().isEmpty() && lista.getRowCount() > 0){      
-            JOptionPane.showMessageDialog(null, "ok", "OK", PLAIN_MESSAGE);
+        if(!nomeLista.getText().isEmpty() && !supermercado.getText().isEmpty() && lista.getRowCount() > 0){
+            DefaultTableModel defTable = (DefaultTableModel) lista.getModel();
             
+            ListaCompras listaCompras = new ListaCompras();
+            
+            listaCompras.setNome_lista(nomeLista.getText());
+            listaCompras.setSupermercado(supermercado.getText());
+            listaCompras.setValorTotal(Double.parseDouble(valorTotalLista.getText()));
+            
+                        
+            for(int i = 0; i < defTable.getRowCount(); i++){
+                try {
+                    Produto produto = new Produto();
+                    ItemLista item = new ItemLista();
+                    produto.setNome((String) defTable.getValueAt(i, 0));
+                    produto.setValor((Double) defTable.getValueAt(i, 2));
+                    item.setProduto(produto);
+                    item.setQuantidade((Integer)defTable.getValueAt(i, 1));
+                    item.setValor((Double) defTable.getValueAt(i, 3));
+                    listaCompras.adicionaItem(item);
+                } catch (Exception ex) {
+                    Logger.getLogger(CriaLista.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            
+            
+            JOptionPane.showMessageDialog(null, "Lista criada com sucesso!", "Sucesso", PLAIN_MESSAGE);
+            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Existem campo em branco, verifique e tente novamente", "Campos em branco", ERROR_MESSAGE);
         }

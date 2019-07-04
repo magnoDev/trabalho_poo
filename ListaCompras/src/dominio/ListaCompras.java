@@ -19,7 +19,16 @@ public class ListaCompras implements Serializable {
     
     private String nome_lista;
     private Cliente cliente;
+    private String supermercado;
     private final List<ItemLista> itens = new ArrayList<>();
+
+    public String getSupermercado() {
+        return supermercado;
+    }
+
+    public void setSupermercado(String supermercado) {
+        this.supermercado = supermercado;
+    }
     private double valorTotal = 0.0;
     
     public ListaCompras(){
