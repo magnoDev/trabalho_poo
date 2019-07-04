@@ -14,10 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author david
- */
 public class ClienteTest {
     
     public ClienteTest() {
@@ -39,7 +35,6 @@ public class ClienteTest {
     public void tearDown() {
     }
 
-    /**
      * Test of getNome method, of class Cliente.
      */
     @Test
@@ -162,7 +157,7 @@ public class ClienteTest {
      * Test of setSenha method, of class Cliente.
      */
     @Test
-    public void testSetSenha() throws Exception {
+    public void testSetSenha() {
         System.out.println("setSenha");
         int senha = 123;
         Cliente instance = new Cliente();
@@ -174,6 +169,5 @@ public class ClienteTest {
         } catch (Exception ex) {
             Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
+    }    
 }
